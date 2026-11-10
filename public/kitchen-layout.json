@@ -1,0 +1,3056 @@
+{
+  "name": "LaPrizza restaurant kitchen",
+  "units": "meters",
+  "coordinateSystem": {
+    "up": "y",
+    "floorCenter": [
+      0,
+      0,
+      0
+    ],
+    "description": "Positions are in meters from the centre of the kitchen floor. +z points to the open (camera) side; the assembly line runs along the rear wall (z = -5)."
+  },
+  "kitchen": {
+    "width": 16,
+    "depth": 10,
+    "wallHeight": 4.2,
+    "materials": {
+      "floor": "floor",
+      "walls": "brick",
+      "wallsOutside": "brickOutside",
+      "ceiling": "ceiling",
+      "beam": "blackPaint"
+    },
+    "ceilingBeam": {
+      "x": 0.6,
+      "width": 0.34,
+      "height": 0.3
+    }
+  },
+  "camera": {
+    "fov": 40,
+    "position": [
+      4.2,
+      6.4,
+      12.8
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "minDistance": 2.2,
+    "maxDistance": 26,
+    "minPolarAngle": 0.12,
+    "maxPolarAngle": 0.48,
+    "panBounds": {
+      "min": [
+        -7.5,
+        0,
+        -4.5
+      ],
+      "max": [
+        7.5,
+        3,
+        4.5
+      ]
+    }
+  },
+  "environment": {
+    "url": "./public/hdri/studio_small_09_1k.hdr",
+    "intensity": 1.0,
+    "credit": "Studio Small 09 HDRI by Poly Haven (CC0) - used only for reflections, not as background"
+  },
+  "modelSource": {
+    "type": "hybrid",
+    "description": "Room shell, counters, oven, dispenser, conveyor and robotic arms are procedural (articulated groups ready for Sprint 3 animation). Pizzas and small props are imported glTF models; their URLs are listed in \"models\"."
+  },
+  "materials": {
+    "floor": {
+      "color": "#fbfaf7",
+      "roughness": 0.28,
+      "metalness": 0,
+      "tileSize": [
+        3,
+        3
+      ],
+      "maps": {
+        "color": "./public/textures/concrete_wall_008/concrete_wall_008_diff_1k.jpg",
+        "roughness": "./public/textures/concrete_wall_008/concrete_wall_008_rough_1k.jpg",
+        "normal": "./public/textures/concrete_wall_008/concrete_wall_008_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.25,
+        0.25
+      ]
+    },
+    "brick": {
+      "color": "#f4e4d8",
+      "roughness": 0.95,
+      "metalness": 0,
+      "tileSize": [
+        2,
+        2
+      ],
+      "maps": {
+        "color": "./public/textures/large_red_bricks/large_red_bricks_diff_1k.jpg",
+        "roughness": "./public/textures/large_red_bricks/large_red_bricks_rough_1k.jpg",
+        "normal": "./public/textures/large_red_bricks/large_red_bricks_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.9,
+        0.9
+      ],
+      "doubleSided": true
+    },
+    "brickOutside": {
+      "color": "#f4e4d8",
+      "roughness": 0.95,
+      "metalness": 0,
+      "tileSize": [
+        2,
+        2
+      ],
+      "maps": {
+        "color": "./public/textures/large_red_bricks/large_red_bricks_diff_1k.jpg",
+        "roughness": "./public/textures/large_red_bricks/large_red_bricks_rough_1k.jpg",
+        "normal": "./public/textures/large_red_bricks/large_red_bricks_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.9,
+        0.9
+      ],
+      "transparent": true,
+      "opacity": 0.25,
+      "side": "back"
+    },
+    "ovenBrick": {
+      "color": "#e8d2c2",
+      "roughness": 0.95,
+      "metalness": 0,
+      "tileSize": [
+        0.9,
+        0.9
+      ],
+      "maps": {
+        "color": "./public/textures/large_red_bricks/large_red_bricks_diff_1k.jpg",
+        "roughness": "./public/textures/large_red_bricks/large_red_bricks_rough_1k.jpg",
+        "normal": "./public/textures/large_red_bricks/large_red_bricks_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.9,
+        0.9
+      ]
+    },
+    "ceiling": {
+      "color": "#f7f6f2",
+      "roughness": 0.92,
+      "metalness": 0,
+      "tileSize": [
+        3,
+        3
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/white_plaster_02/white_plaster_02_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.3,
+        0.3
+      ]
+    },
+    "concrete": {
+      "color": "#d9d6d0",
+      "roughness": 0.62,
+      "metalness": 0,
+      "tileSize": [
+        2.5,
+        2.5
+      ],
+      "maps": {
+        "color": "./public/textures/concrete_wall_008/concrete_wall_008_diff_1k.jpg",
+        "roughness": "./public/textures/concrete_wall_008/concrete_wall_008_rough_1k.jpg",
+        "normal": "./public/textures/concrete_wall_008/concrete_wall_008_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.5,
+        0.5
+      ]
+    },
+    "ovenConcrete": {
+      "color": "#e2e0dc",
+      "roughness": 0.5,
+      "metalness": 0.12,
+      "tileSize": [
+        1.4,
+        1.4
+      ],
+      "maps": {
+        "color": "./public/textures/brushed_concrete/brushed_concrete_diff_1k.jpg",
+        "roughness": "./public/textures/brushed_concrete/brushed_concrete_rough_1k.jpg",
+        "normal": "./public/textures/brushed_concrete/brushed_concrete_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.6,
+        0.6
+      ]
+    },
+    "soot": {
+      "color": "#211a16",
+      "roughness": 0.96,
+      "metalness": 0,
+      "tileSize": [
+        0.6,
+        0.6
+      ],
+      "maps": {
+        "color": "./public/textures/brushed_concrete/brushed_concrete_diff_1k.jpg",
+        "roughness": "./public/textures/brushed_concrete/brushed_concrete_rough_1k.jpg",
+        "normal": "./public/textures/brushed_concrete/brushed_concrete_nor_gl_1k.jpg"
+      }
+    },
+    "steel": {
+      "color": "#e6edf1",
+      "roughness": 0.26,
+      "metalness": 0.9,
+      "tileSize": [
+        0.8,
+        0.8
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/brushed_concrete/brushed_concrete_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.12,
+        0.12
+      ]
+    },
+    "darkSteel": {
+      "color": "#5a6064",
+      "roughness": 0.4,
+      "metalness": 0.8,
+      "tileSize": [
+        0.8,
+        0.8
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/brushed_concrete/brushed_concrete_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.12,
+        0.12
+      ]
+    },
+    "whitePaint": {
+      "color": "#f2f1ed",
+      "roughness": 0.45,
+      "metalness": 0.05,
+      "tileSize": [
+        1,
+        1
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/white_plaster_02/white_plaster_02_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.08,
+        0.08
+      ]
+    },
+    "robotWhite": {
+      "color": "#f6f6f3",
+      "roughness": 0.3,
+      "metalness": 0.02,
+      "tileSize": [
+        0.6,
+        0.6
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/white_plaster_02/white_plaster_02_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.04,
+        0.04
+      ]
+    },
+    "blackPaint": {
+      "color": "#1f2122",
+      "roughness": 0.5,
+      "metalness": 0.3,
+      "tileSize": [
+        1,
+        1
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/white_plaster_02/white_plaster_02_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.08,
+        0.08
+      ]
+    },
+    "copper": {
+      "color": "#c88456",
+      "roughness": 0.3,
+      "metalness": 0.95,
+      "tileSize": [
+        0.5,
+        0.5
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/brushed_concrete/brushed_concrete_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.1,
+        0.1
+      ]
+    },
+    "belt": {
+      "color": "#5f6466",
+      "roughness": 0.8,
+      "metalness": 0,
+      "tileSize": [
+        0.45,
+        0.45
+      ],
+      "normalScale": [
+        0.6,
+        0.6
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/rubber_tiles/rubber_tiles_rough_1k.jpg",
+        "normal": "./public/textures/rubber_tiles/rubber_tiles_nor_gl_1k.jpg"
+      }
+    },
+    "bark": {
+      "color": "#ffffff",
+      "roughness": 1,
+      "metalness": 0,
+      "tileSize": [
+        0.45,
+        0.45
+      ],
+      "maps": {
+        "color": "./public/textures/bark_brown_02/bark_brown_02_diff_1k.jpg",
+        "roughness": "./public/textures/bark_brown_02/bark_brown_02_rough_1k.jpg",
+        "normal": "./public/textures/bark_brown_02/bark_brown_02_nor_gl_1k.jpg"
+      }
+    },
+    "logEnd": {
+      "color": "#e6c7a0",
+      "roughness": 0.9,
+      "metalness": 0,
+      "tileSize": [
+        0.22,
+        0.22
+      ],
+      "maps": {
+        "color": "./public/textures/wood_table/wood_table_diff_1k.jpg",
+        "roughness": "./public/textures/wood_table/wood_table_rough_1k.jpg",
+        "normal": "./public/textures/wood_table/wood_table_nor_gl_1k.jpg"
+      }
+    },
+    "wood": {
+      "color": "#ffffff",
+      "roughness": 0.68,
+      "metalness": 0,
+      "tileSize": [
+        1.4,
+        1.4
+      ],
+      "maps": {
+        "color": "./public/textures/wood_table/wood_table_diff_1k.jpg",
+        "roughness": "./public/textures/wood_table/wood_table_rough_1k.jpg",
+        "normal": "./public/textures/wood_table/wood_table_nor_gl_1k.jpg"
+      }
+    },
+    "glass": {
+      "color": "#eef4f5",
+      "roughness": 0.06,
+      "metalness": 0,
+      "tileSize": [
+        1,
+        1
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/white_plaster_02/white_plaster_02_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0,
+        0
+      ],
+      "transparent": true,
+      "opacity": 0.2
+    },
+    "dough": {
+      "color": "#ecd3a3",
+      "roughness": 0.85,
+      "metalness": 0,
+      "tileSize": [
+        0.3,
+        0.3
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/white_plaster_02/white_plaster_02_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.6,
+        0.6
+      ],
+      "doubleSided": true
+    },
+    "sauce": {
+      "color": "#a72a19",
+      "roughness": 0.32,
+      "metalness": 0,
+      "tileSize": [
+        0.25,
+        0.25
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/white_plaster_02/white_plaster_02_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.4,
+        0.4
+      ]
+    },
+    "cheese": {
+      "color": "#f2da8e",
+      "roughness": 0.42,
+      "metalness": 0,
+      "tileSize": [
+        0.25,
+        0.25
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/white_plaster_02/white_plaster_02_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.8,
+        0.8
+      ]
+    },
+    "pepperoni": {
+      "color": "#8d2a1d",
+      "roughness": 0.5,
+      "metalness": 0,
+      "tileSize": [
+        0.2,
+        0.2
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/white_plaster_02/white_plaster_02_nor_gl_1k.jpg"
+      }
+    },
+    "basil": {
+      "color": "#3d7a2b",
+      "roughness": 0.55,
+      "metalness": 0,
+      "tileSize": [
+        0.2,
+        0.2
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/white_plaster_02/white_plaster_02_nor_gl_1k.jpg"
+      }
+    },
+    "embers": {
+      "color": "#ff7a2a",
+      "roughness": 0.9,
+      "metalness": 0,
+      "tileSize": [
+        0.3,
+        0.3
+      ],
+      "maps": {
+        "color": "./public/textures/bark_brown_02/bark_brown_02_diff_1k.jpg",
+        "roughness": "./public/textures/bark_brown_02/bark_brown_02_rough_1k.jpg",
+        "normal": "./public/textures/bark_brown_02/bark_brown_02_nor_gl_1k.jpg"
+      },
+      "emissive": "#ff6a1c",
+      "emissiveIntensity": 2.4
+    }
+  },
+  "equipment": [
+    {
+      "id": "assembly-line",
+      "type": "assembly-line",
+      "name": "Automated pizza assembly line",
+      "position": [
+        -2.125,
+        0,
+        -3.85
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        10.55,
+        0.95,
+        1.7
+      ],
+      "materials": {
+        "top": "concrete",
+        "frame": "whitePaint"
+      },
+      "frameSpacing": 1.15,
+      "receivingPlatform": {
+        "x": -4.425,
+        "z": 0.25,
+        "size": [
+          0.85,
+          0.14,
+          0.6
+        ],
+        "material": "steel"
+      },
+      "dispenser": {
+        "x": -4.425,
+        "z": 0.25,
+        "magazineBottom": 1.45,
+        "magazineHeight": 0.9,
+        "radius": 0.19,
+        "crustCount": 16,
+        "gantryHeight": 2.62,
+        "feedPipeTop": 4.2
+      },
+      "conveyor": {
+        "start": -4,
+        "end": 5.464,
+        "z": 0.25,
+        "width": 0.6,
+        "height": 0.14,
+        "material": "belt"
+      },
+      "robotArms": [
+        {
+          "id": "arm-sauce",
+          "x": -2.675,
+          "z": -0.5,
+          "ingredient": "sauce",
+          "reach": 0.75,
+          "tipHeight": 0.27,
+          "yaw": 0,
+          "ingredientBin": {
+            "x": -2.255,
+            "z": -0.52
+          }
+        },
+        {
+          "id": "arm-cheese",
+          "x": -1.025,
+          "z": -0.5,
+          "ingredient": "cheese",
+          "reach": 0.7,
+          "tipHeight": 0.3,
+          "yaw": 0.08,
+          "ingredientBin": {
+            "x": -0.605,
+            "z": -0.52
+          }
+        },
+        {
+          "id": "arm-pepperoni",
+          "x": 0.625,
+          "z": -0.5,
+          "ingredient": "pepperoni",
+          "reach": 0.78,
+          "tipHeight": 0.26,
+          "yaw": -0.06,
+          "ingredientBin": {
+            "x": 1.045,
+            "z": -0.52
+          }
+        },
+        {
+          "id": "arm-basil",
+          "x": 2.275,
+          "z": -0.5,
+          "ingredient": "basil",
+          "reach": 0.72,
+          "tipHeight": 0.32,
+          "yaw": 0.1,
+          "ingredientBin": {
+            "x": 2.695,
+            "z": -0.52
+          }
+        }
+      ],
+      "armDimensions": {
+        "shoulderHeight": 0.42,
+        "upperArm": 0.68,
+        "forearm": 0.6,
+        "tool": 0.15
+      },
+      "pizzaStages": [
+        {
+          "x": -4.425,
+          "stage": "dough"
+        },
+        {
+          "x": -3.525,
+          "stage": "dough"
+        },
+        {
+          "x": -2.675,
+          "stage": "sauce"
+        },
+        {
+          "x": -1.845,
+          "stage": "sauce"
+        },
+        {
+          "x": -1.025,
+          "stage": "cheese"
+        },
+        {
+          "x": -0.205,
+          "stage": "cheese"
+        }
+      ],
+      "components": [
+        "receiving-platform",
+        "overhead-dough-dispenser",
+        "conveyor-belt",
+        "robotic-arms",
+        "ingredient-bins"
+      ]
+    },
+    {
+      "id": "tunnel-oven",
+      "type": "tunnel-oven",
+      "name": "Rustic wood-fired brick tunnel oven",
+      "position": [
+        4.3,
+        0,
+        -3.85
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        2.3,
+        0.95,
+        2.0
+      ],
+      "materials": {
+        "base": "concrete",
+        "brick": "ovenBrick",
+        "trim": "copper",
+        "flue": "steel"
+      },
+      "body": {
+        "length": 1.9,
+        "depth": 1.4,
+        "wallHeight": 0.45,
+        "centerZ": 0.2
+      },
+      "tunnelZ": 0.25,
+      "archWidth": 0.7,
+      "beltTop": 1.09,
+      "beltStart": -0.961,
+      "beltEnd": 1.35,
+      "flueTop": 4.2,
+      "firewood": {
+        "rows": 6,
+        "seed": 11
+      }
+    },
+    {
+      "id": "refrigerator",
+      "type": "refrigerator",
+      "name": "Two-door stainless refrigerator",
+      "position": [
+        -7.58,
+        0,
+        3.9
+      ],
+      "rotation": [
+        0,
+        1.570796,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        1.4,
+        2.05,
+        0.8
+      ]
+    },
+    {
+      "id": "griddle",
+      "type": "griddle",
+      "name": "Flat-top griddle and charbroiler grill",
+      "position": [
+        7.55,
+        0,
+        0.3
+      ],
+      "rotation": [
+        0,
+        -1.570796,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        1.2,
+        0.9,
+        0.85
+      ]
+    },
+    {
+      "id": "deep-fryer",
+      "type": "deep-fryer",
+      "name": "Twin-basket deep fryer",
+      "position": [
+        7.55,
+        0,
+        1.35
+      ],
+      "rotation": [
+        0,
+        -1.570796,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        0.6,
+        0.9,
+        0.85
+      ]
+    },
+    {
+      "id": "cook-line-counter",
+      "type": "work-counter",
+      "name": "Stainless work counter",
+      "position": [
+        7.55,
+        0,
+        2.45
+      ],
+      "rotation": [
+        0,
+        -1.570796,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        1.4,
+        0.9,
+        0.85
+      ]
+    },
+    {
+      "id": "exhaust-hood",
+      "type": "exhaust-hood",
+      "name": "Stainless exhaust hood",
+      "position": [
+        7.42,
+        2.05,
+        0.65
+      ],
+      "rotation": [
+        0,
+        -1.570796,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        2.2,
+        0.6,
+        1.1
+      ],
+      "ductTop": 4.2
+    },
+    {
+      "id": "sink",
+      "type": "sink",
+      "name": "Double-bowl commercial sink",
+      "position": [
+        -7.6,
+        0,
+        0.6
+      ],
+      "rotation": [
+        0,
+        1.570796,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        1.4,
+        0.9,
+        0.7
+      ]
+    },
+    {
+      "id": "dishwasher",
+      "type": "dishwasher",
+      "name": "Undercounter commercial dishwasher",
+      "position": [
+        -7.6,
+        0,
+        1.65
+      ],
+      "rotation": [
+        0,
+        1.570796,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        0.65,
+        0.85,
+        0.7
+      ]
+    },
+    {
+      "id": "prep-table",
+      "type": "prep-table",
+      "name": "Dough preparation table",
+      "position": [
+        -2.2,
+        0,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        2.6,
+        0.92,
+        1.0
+      ]
+    },
+    {
+      "id": "wall-shelves",
+      "type": "wall-shelves",
+      "name": "Wall-mounted ingredient shelves",
+      "position": [
+        -1.4,
+        0,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        7.6,
+        3.1,
+        0.34
+      ],
+      "levels": [
+        2.05,
+        2.55,
+        3.05
+      ]
+    },
+    {
+      "id": "tool-rail",
+      "type": "tool-rail",
+      "name": "Pizza peel and tool rail",
+      "position": [
+        7.95,
+        1.75,
+        -3.85
+      ],
+      "rotation": [
+        0,
+        -1.570796,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        1.6,
+        0.8,
+        0.1
+      ],
+      "tools": [
+        {
+          "x": -0.6,
+          "blade": [
+            0.36,
+            0.36
+          ],
+          "handle": 1.2,
+          "material": "steel"
+        },
+        {
+          "x": -0.2,
+          "blade": [
+            0.4,
+            0.4
+          ],
+          "handle": 1.1,
+          "material": "wood"
+        },
+        {
+          "x": 0.2,
+          "blade": [
+            0.22,
+            0.22
+          ],
+          "handle": 1.3,
+          "material": "steel"
+        },
+        {
+          "x": 0.55,
+          "blade": [
+            0.12,
+            0.08
+          ],
+          "handle": 1,
+          "material": "darkSteel"
+        }
+      ]
+    },
+    {
+      "id": "pilaster-1",
+      "type": "column",
+      "name": "Black steel pilaster",
+      "position": [
+        -7.94,
+        0,
+        -0.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        0.1,
+        4.2,
+        0.3
+      ],
+      "material": "blackPaint"
+    },
+    {
+      "id": "pilaster-2",
+      "type": "column",
+      "name": "Black steel pilaster",
+      "position": [
+        -7.94,
+        0,
+        2.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        0.1,
+        4.2,
+        0.3
+      ],
+      "material": "blackPaint"
+    },
+    {
+      "id": "pilaster-3",
+      "type": "column",
+      "name": "Black steel pilaster",
+      "position": [
+        7.94,
+        0,
+        -2.55
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        0.1,
+        4.2,
+        0.3
+      ],
+      "material": "blackPaint"
+    },
+    {
+      "id": "pilaster-4",
+      "type": "column",
+      "name": "Black steel pilaster",
+      "position": [
+        7.94,
+        0,
+        3.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        0.1,
+        4.2,
+        0.3
+      ],
+      "material": "blackPaint"
+    },
+    {
+      "id": "pilaster-5",
+      "type": "column",
+      "name": "Black steel pilaster",
+      "position": [
+        -5.6,
+        0,
+        -4.94
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        0.3,
+        4.2,
+        0.1
+      ],
+      "material": "blackPaint"
+    },
+    {
+      "id": "pilaster-6",
+      "type": "column",
+      "name": "Black steel pilaster",
+      "position": [
+        3.3,
+        0,
+        -4.94
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensions": [
+        0.3,
+        4.2,
+        0.1
+      ],
+      "material": "blackPaint"
+    }
+  ],
+  "models": {
+    "pizzas": {
+      "url": "./public/models/pocolov-pizzas/scene.gltf",
+      "scale": 0.016,
+      "align": "bottom",
+      "credit": "Pocolov Pizzas by pocolov (10-pizza subset)",
+      "license": "CC-BY-4.0",
+      "sourceUrl": "https://sketchfab.com/3d-models/pocolov-pizzas-18c884b3805a45728cf350ee6a377f95"
+    },
+    "pizzaBox": {
+      "url": "./public/models/pizza-box/pizza-box.glb",
+      "scale": 0.36,
+      "instanced": true,
+      "nodeOverrides": {
+        "lid": {
+          "position": [
+            0,
+            0.18,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            3.141593
+          ]
+        }
+      },
+      "credit": "Pizza Box from Food Kit by Kenney",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://kenney.nl/assets/food-kit"
+    },
+    "fluorescentLight": {
+      "url": "./public/models/polyhaven/mounted_fluorescent_lights/mounted_fluorescent_lights_1k.gltf",
+      "credit": "Mounted Fluorescent Lights by Poly Haven",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://polyhaven.com/a/mounted_fluorescent_lights",
+      "emissive": {
+        "color": "#fff8ec",
+        "intensity": 4
+      }
+    },
+    "steelShelves": {
+      "url": "./public/models/polyhaven/steel_frame_shelves_02/steel_frame_shelves_02_1k.gltf",
+      "credit": "Steel Frame Shelves 02 by Poly Haven",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://polyhaven.com/a/steel_frame_shelves_02"
+    },
+    "enamelPot": {
+      "url": "./public/models/polyhaven/pot_enamel_01/pot_enamel_01_1k.gltf",
+      "credit": "Enamel Pot 01 by Poly Haven",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://polyhaven.com/a/pot_enamel_01"
+    },
+    "ceramicPot": {
+      "url": "./public/models/polyhaven/ceramic_pot/ceramic_pot_1k.gltf",
+      "credit": "Ceramic Pot by Poly Haven",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://polyhaven.com/a/ceramic_pot"
+    },
+    "storageBox": {
+      "url": "./public/models/polyhaven/plastic_container/plastic_container_1k.gltf",
+      "credit": "Plastic Container by Poly Haven",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://polyhaven.com/a/plastic_container"
+    },
+    "cuttingBoard": {
+      "url": "./public/models/polyhaven/wooden_cutting_board/wooden_cutting_board_1k.gltf",
+      "credit": "Wooden Cutting Board by Poly Haven",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://polyhaven.com/a/wooden_cutting_board"
+    },
+    "hatchet": {
+      "url": "./public/models/polyhaven/hatchet/hatchet_1k.gltf",
+      "credit": "Hatchet by Poly Haven",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://polyhaven.com/a/hatchet"
+    },
+    "fireExtinguisher": {
+      "url": "./public/models/polyhaven/korean_fire_extinguisher_01/korean_fire_extinguisher_01_1k.gltf",
+      "credit": "Korean Fire Extinguisher 01 by Poly Haven",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://polyhaven.com/a/korean_fire_extinguisher_01"
+    },
+    "wallClock": {
+      "url": "./public/models/polyhaven/wall_clock/wall_clock_1k.gltf",
+      "credit": "Wall Clock by Poly Haven",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://polyhaven.com/a/wall_clock",
+      "clockHands": {
+        "hours": {
+          "node": "wall_clock_hours_hand",
+          "restAngle": 306.8
+        },
+        "minutes": {
+          "node": "wall_clock_minute_hand",
+          "restAngle": 57.0
+        },
+        "seconds": {
+          "node": "wall_clock_second_hand",
+          "restAngle": 170.5
+        }
+      }
+    }
+  },
+  "props": [
+    {
+      "model": "pizzas",
+      "position": [
+        -1.5,
+        1.09,
+        -3.6
+      ],
+      "rotation": [
+        0,
+        0.3,
+        0
+      ],
+      "scale": 1,
+      "node": "Pizza_01"
+    },
+    {
+      "model": "pizzas",
+      "position": [
+        -0.65,
+        1.09,
+        -3.6
+      ],
+      "rotation": [
+        0,
+        1.9,
+        0
+      ],
+      "scale": 1,
+      "node": "Pizza_03"
+    },
+    {
+      "model": "pizzas",
+      "position": [
+        0.15,
+        1.09,
+        -3.6
+      ],
+      "rotation": [
+        0,
+        4.1,
+        0
+      ],
+      "scale": 1,
+      "node": "Pizza_05"
+    },
+    {
+      "model": "pizzas",
+      "position": [
+        1.2,
+        1.09,
+        -3.6
+      ],
+      "rotation": [
+        0,
+        0.8,
+        0
+      ],
+      "scale": 1,
+      "node": "Pizza_08"
+    },
+    {
+      "model": "pizzas",
+      "position": [
+        2.0,
+        1.09,
+        -3.6
+      ],
+      "rotation": [
+        0,
+        2.6,
+        0
+      ],
+      "scale": 1,
+      "node": "Pizza_10"
+    },
+    {
+      "model": "pizzas",
+      "position": [
+        2.75,
+        1.09,
+        -3.6
+      ],
+      "rotation": [
+        0,
+        5.2,
+        0
+      ],
+      "scale": 1,
+      "node": "Pizza_14"
+    },
+    {
+      "model": "cuttingBoard",
+      "position": [
+        -2.65,
+        0.92,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0.1,
+        0
+      ],
+      "scale": 1.0
+    },
+    {
+      "model": "pizzas",
+      "position": [
+        -2.65,
+        0.961,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0.4,
+        0
+      ],
+      "scale": 1,
+      "node": "Pizza_27"
+    },
+    {
+      "model": "cuttingBoard",
+      "position": [
+        -1.75,
+        0.92,
+        1.4
+      ],
+      "rotation": [
+        0,
+        -0.04,
+        0
+      ],
+      "scale": 1.0
+    },
+    {
+      "model": "pizzas",
+      "position": [
+        -1.75,
+        0.961,
+        1.4
+      ],
+      "rotation": [
+        0,
+        2.2,
+        0
+      ],
+      "scale": 1,
+      "node": "Pizza_33"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -6.655,
+        4.2,
+        -3.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -5.745,
+        4.2,
+        -3.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -4.655,
+        4.2,
+        -3.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -3.745,
+        4.2,
+        -3.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -2.655,
+        4.2,
+        -3.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -1.745,
+        4.2,
+        -3.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        1.545,
+        4.2,
+        -3.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        2.455,
+        4.2,
+        -3.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        3.545,
+        4.2,
+        -3.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        4.455,
+        4.2,
+        -3.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        5.545,
+        4.2,
+        -3.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        6.455,
+        4.2,
+        -3.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -6.655,
+        4.2,
+        -1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -5.745,
+        4.2,
+        -1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -4.655,
+        4.2,
+        -1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -3.745,
+        4.2,
+        -1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -2.655,
+        4.2,
+        -1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -1.745,
+        4.2,
+        -1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        1.545,
+        4.2,
+        -1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        2.455,
+        4.2,
+        -1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        3.545,
+        4.2,
+        -1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        4.455,
+        4.2,
+        -1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        5.545,
+        4.2,
+        -1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        6.455,
+        4.2,
+        -1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -6.655,
+        4.2,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -5.745,
+        4.2,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -4.655,
+        4.2,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -3.745,
+        4.2,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -2.655,
+        4.2,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -1.745,
+        4.2,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        1.545,
+        4.2,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        2.455,
+        4.2,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        3.545,
+        4.2,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        4.455,
+        4.2,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        5.545,
+        4.2,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        6.455,
+        4.2,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -6.655,
+        4.2,
+        3.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -5.745,
+        4.2,
+        3.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -4.655,
+        4.2,
+        3.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -3.745,
+        4.2,
+        3.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -2.655,
+        4.2,
+        3.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        -1.745,
+        4.2,
+        3.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        1.545,
+        4.2,
+        3.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        2.455,
+        4.2,
+        3.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        3.545,
+        4.2,
+        3.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        4.455,
+        4.2,
+        3.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        5.545,
+        4.2,
+        3.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "fluorescentLight",
+      "position": [
+        6.455,
+        4.2,
+        3.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "node": "mounted_fluorescent_lights_a",
+      "mount": "ceiling"
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        -4.75,
+        3.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        -0.04,
+        0
+      ],
+      "scale": 0.36
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        -4.15,
+        3.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        0.0,
+        0
+      ],
+      "scale": 0.36
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        -3.55,
+        3.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        0.04,
+        0
+      ],
+      "scale": 0.36
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        -2.95,
+        3.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        -0.04,
+        0
+      ],
+      "scale": 0.36
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        -2.35,
+        3.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        0.0,
+        0
+      ],
+      "scale": 0.36
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        -1.75,
+        3.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        0.04,
+        0
+      ],
+      "scale": 0.36
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        -1.15,
+        3.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        -0.04,
+        0
+      ],
+      "scale": 0.36
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        -0.55,
+        3.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        0.0,
+        0
+      ],
+      "scale": 0.36
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        0.05,
+        3.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        0.04,
+        0
+      ],
+      "scale": 0.36
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        0.65,
+        3.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        -0.04,
+        0
+      ],
+      "scale": 0.36
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        1.25,
+        3.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        0.0,
+        0
+      ],
+      "scale": 0.36
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        1.85,
+        3.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        0.04,
+        0
+      ],
+      "scale": 0.36
+    },
+    {
+      "model": "ceramicPot",
+      "position": [
+        -4.6,
+        2.57,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        0.0,
+        0
+      ],
+      "scale": 0.4
+    },
+    {
+      "model": "ceramicPot",
+      "position": [
+        -3.7,
+        2.57,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        0.7,
+        0
+      ],
+      "scale": 0.4
+    },
+    {
+      "model": "ceramicPot",
+      "position": [
+        -2.8,
+        2.57,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        1.4,
+        0
+      ],
+      "scale": 0.4
+    },
+    {
+      "model": "ceramicPot",
+      "position": [
+        -1.9,
+        2.57,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        2.1,
+        0
+      ],
+      "scale": 0.4
+    },
+    {
+      "model": "ceramicPot",
+      "position": [
+        -1.0,
+        2.57,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        2.8,
+        0
+      ],
+      "scale": 0.4
+    },
+    {
+      "model": "ceramicPot",
+      "position": [
+        -0.1,
+        2.57,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        3.5,
+        0
+      ],
+      "scale": 0.4
+    },
+    {
+      "model": "ceramicPot",
+      "position": [
+        0.8,
+        2.57,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        4.2,
+        0
+      ],
+      "scale": 0.4
+    },
+    {
+      "model": "ceramicPot",
+      "position": [
+        1.7,
+        2.57,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        4.9,
+        0
+      ],
+      "scale": 0.4
+    },
+    {
+      "model": "enamelPot",
+      "position": [
+        -4.65,
+        2.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        0.0,
+        0
+      ],
+      "scale": 0.85
+    },
+    {
+      "model": "enamelPot",
+      "position": [
+        -3.95,
+        2.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        1.3,
+        0
+      ],
+      "scale": 1.0
+    },
+    {
+      "model": "enamelPot",
+      "position": [
+        -3.25,
+        2.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        2.6,
+        0
+      ],
+      "scale": 0.85
+    },
+    {
+      "model": "enamelPot",
+      "position": [
+        -2.55,
+        2.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        3.9,
+        0
+      ],
+      "scale": 1.0
+    },
+    {
+      "model": "enamelPot",
+      "position": [
+        -1.85,
+        2.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        5.2,
+        0
+      ],
+      "scale": 0.85
+    },
+    {
+      "model": "enamelPot",
+      "position": [
+        -1.15,
+        2.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        6.5,
+        0
+      ],
+      "scale": 1.0
+    },
+    {
+      "model": "enamelPot",
+      "position": [
+        -0.45,
+        2.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        7.8,
+        0
+      ],
+      "scale": 0.85
+    },
+    {
+      "model": "enamelPot",
+      "position": [
+        0.25,
+        2.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        9.1,
+        0
+      ],
+      "scale": 1.0
+    },
+    {
+      "model": "enamelPot",
+      "position": [
+        0.95,
+        2.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        10.4,
+        0
+      ],
+      "scale": 0.85
+    },
+    {
+      "model": "enamelPot",
+      "position": [
+        1.65,
+        2.07,
+        -4.83
+      ],
+      "rotation": [
+        0,
+        11.7,
+        0
+      ],
+      "scale": 1.0
+    },
+    {
+      "model": "steelShelves",
+      "position": [
+        -7.68,
+        0,
+        -1.9
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 1
+    },
+    {
+      "model": "steelShelves",
+      "position": [
+        -7.68,
+        0,
+        -1.28
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 1
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        -7.68,
+        0.134,
+        -1.9
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 0.5
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        -7.68,
+        0.134,
+        -1.28
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 0.5
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        -7.68,
+        0.64,
+        -1.9
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 0.5
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        -7.68,
+        1.147,
+        -1.28
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 0.5
+    },
+    {
+      "model": "storageBox",
+      "position": [
+        -7.68,
+        1.653,
+        -1.9
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 0.5
+    },
+    {
+      "model": "enamelPot",
+      "position": [
+        -7.68,
+        0.64,
+        -1.22
+      ],
+      "rotation": [
+        0,
+        0.6,
+        0
+      ],
+      "scale": 1
+    },
+    {
+      "model": "pizzas",
+      "position": [
+        5.5,
+        1.09,
+        -3.6
+      ],
+      "rotation": [
+        0,
+        1.3,
+        0
+      ],
+      "scale": 1,
+      "node": "Pizza_17"
+    },
+    {
+      "model": "pizzaBox",
+      "position": [
+        -3.2,
+        0.265,
+        1.2
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 1,
+      "stack": {
+        "count": 6,
+        "spacing": 0.0648,
+        "seed": 0,
+        "twist": 0.02
+      }
+    },
+    {
+      "model": "pizzaBox",
+      "position": [
+        -2.7,
+        0.265,
+        1.2
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 1,
+      "stack": {
+        "count": 7,
+        "spacing": 0.0648,
+        "seed": 1,
+        "twist": 0.02
+      }
+    },
+    {
+      "model": "pizzaBox",
+      "position": [
+        -2.2,
+        0.265,
+        1.2
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 1,
+      "stack": {
+        "count": 8,
+        "spacing": 0.0648,
+        "seed": 2,
+        "twist": 0.02
+      }
+    },
+    {
+      "model": "pizzaBox",
+      "position": [
+        -1.7,
+        0.265,
+        1.2
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 1,
+      "stack": {
+        "count": 6,
+        "spacing": 0.0648,
+        "seed": 3,
+        "twist": 0.02
+      }
+    },
+    {
+      "model": "pizzaBox",
+      "position": [
+        -1.2,
+        0.265,
+        1.2
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 1,
+      "stack": {
+        "count": 7,
+        "spacing": 0.0648,
+        "seed": 4,
+        "twist": 0.02
+      }
+    },
+    {
+      "model": "pizzaBox",
+      "position": [
+        -3.2,
+        0.265,
+        1.6
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 1,
+      "stack": {
+        "count": 8,
+        "spacing": 0.0648,
+        "seed": 5,
+        "twist": 0.02
+      }
+    },
+    {
+      "model": "pizzaBox",
+      "position": [
+        -2.7,
+        0.265,
+        1.6
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 1,
+      "stack": {
+        "count": 6,
+        "spacing": 0.0648,
+        "seed": 6,
+        "twist": 0.02
+      }
+    },
+    {
+      "model": "pizzaBox",
+      "position": [
+        -2.2,
+        0.265,
+        1.6
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 1,
+      "stack": {
+        "count": 7,
+        "spacing": 0.0648,
+        "seed": 7,
+        "twist": 0.02
+      }
+    },
+    {
+      "model": "pizzaBox",
+      "position": [
+        -1.7,
+        0.265,
+        1.6
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 1,
+      "stack": {
+        "count": 8,
+        "spacing": 0.0648,
+        "seed": 8,
+        "twist": 0.02
+      }
+    },
+    {
+      "model": "pizzaBox",
+      "position": [
+        -1.2,
+        0.265,
+        1.6
+      ],
+      "rotation": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 1,
+      "stack": {
+        "count": 6,
+        "spacing": 0.0648,
+        "seed": 9,
+        "twist": 0.02
+      }
+    },
+    {
+      "model": "hatchet",
+      "position": [
+        4.75,
+        0.97,
+        -4.5
+      ],
+      "rotation": [
+        0,
+        0,
+        1.5708
+      ],
+      "scale": 1.4
+    },
+    {
+      "model": "fireExtinguisher",
+      "position": [
+        7.35,
+        1.0,
+        -4.82
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1
+    },
+    {
+      "model": "wallClock",
+      "position": [
+        3.3,
+        3.3,
+        -4.89
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.3
+    }
+  ],
+  "lighting": {
+    "ambient": {
+      "color": "#ffffff",
+      "intensity": 0.45
+    },
+    "hemisphere": {
+      "skyColor": "#ffffff",
+      "groundColor": "#d6cfc8",
+      "intensity": 0.6
+    },
+    "spotlight": {
+      "color": "#fff8ef",
+      "intensity": 40,
+      "position": [
+        0.6,
+        4.05,
+        -0.6
+      ],
+      "target": [
+        -0.6,
+        0.95,
+        -3.85
+      ],
+      "angle": 1.0,
+      "penumbra": 0.6,
+      "decay": 1.5,
+      "distance": 18,
+      "castShadow": true,
+      "shadowMapSize": 2048,
+      "shadowBias": -0.0003,
+      "shadowNormalBias": 0.02
+    },
+    "fill": {
+      "color": "#eef3ff",
+      "intensity": 0.55,
+      "position": [
+        -4,
+        9,
+        9
+      ]
+    },
+    "ceilingStrips": {
+      "color": "#f6f8ff",
+      "intensity": 3.5,
+      "width": 13.5,
+      "height": 0.3,
+      "y": 4.1,
+      "rows": [
+        -3.3,
+        -1.0,
+        1.4,
+        3.6
+      ]
+    },
+    "ceilingBounce": {
+      "color": "#fffaf4",
+      "intensity": 0.8,
+      "width": 15,
+      "height": 9,
+      "y": 3.6
+    },
+    "ovenFire": {
+      "color": "#ff7b30",
+      "intensity": 1.2,
+      "distance": 2.2,
+      "decay": 2
+    }
+  },
+  "attribution": [
+    {
+      "asset": "PBR textures and HDRI",
+      "author": "Poly Haven",
+      "license": "CC0-1.0",
+      "url": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "Pocolov Pizzas",
+      "author": "pocolov",
+      "license": "CC-BY-4.0",
+      "url": "https://sketchfab.com/3d-models/pocolov-pizzas-18c884b3805a45728cf350ee6a377f95"
+    },
+    {
+      "asset": "Pizza Box (Food Kit)",
+      "author": "Kenney",
+      "license": "CC0-1.0",
+      "url": "https://kenney.nl/assets/food-kit"
+    },
+    {
+      "asset": "3D props (fluorescent lights, shelves, pots, boxes, boards, hatchet, extinguisher, clock)",
+      "author": "Poly Haven",
+      "license": "CC0-1.0",
+      "url": "https://polyhaven.com/models"
+    }
+  ]
+}

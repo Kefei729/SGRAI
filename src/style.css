@@ -1,0 +1,650 @@
+/* Tipos de letra: DM Sans para o texto e Playfair Display para os títulos. */
+
+/* Web fonts: DM Sans for text and Playfair Display for headings. */
+@import url('../public/fonts/fonts.css');
+
+/* Letra base, cor do texto e suavização da letra para toda a página. */
+
+/* Base font, text colour and font smoothing for the whole page. */
+:root {
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  color: #24231f;
+  background: #ece9e2;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-optical-sizing: auto;
+}
+
+/* Os tamanhos dos elementos incluem as margens internas e as bordas. */
+
+/* Element sizes include padding and borders. */
+* {
+  box-sizing: border-box;
+}
+
+/* A página ocupa a janela inteira, sem barras de deslocamento. */
+
+/* The page fills the whole window, without scrollbars. */
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  min-width: 320px;
+  min-height: 480px;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: #ece9e2;
+}
+
+/* Botões e links usam a cor e a letra do contexto. */
+
+/* Buttons and links use the surrounding colour and font. */
+button,
+a {
+  color: inherit;
+  font: inherit;
+}
+
+/* Contentor principal com o canvas 3D e as camadas da interface. */
+
+/* Main container holding the 3D canvas and the interface overlays. */
+.scene-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  isolation: isolate;
+  overflow: hidden;
+  background: #ece9e2;
+}
+
+/* Canvas 3D a ocupar o contentor; o touch-action está desligado para os gestos controlarem a câmara. */
+
+/* 3D canvas filling the container; touch-action is off so drag gestures control the camera. */
+#scene {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+/* Esbatimento suave em baixo, por trás da barra de controlos. */
+
+/* Soft fade at the bottom, behind the control bar. */
+.scene-shell::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(241, 238, 230, 0.92), transparent 18%);
+}
+
+/* As camadas da interface ficam por cima do canvas. */
+
+/* Interface overlays float above the canvas. */
+.topbar,
+.legend,
+.control-bar,
+.loading-message,
+.texture-warning {
+  position: absolute;
+  z-index: 2;
+}
+
+/* Barra superior: marca (também repõe a vista). */
+
+/* Top bar: brand (also resets the view). */
+.topbar {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5.2vw;
+  border-bottom: 1px solid rgba(43, 41, 35, 0.1);
+}
+
+/* Logótipo e nome LaPrizza; clicar nele repõe a vista da câmara. */
+
+/* LaPrizza logo and name; clicking it resets the camera view. */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.brand-mark {
+  width: 29px;
+  height: 29px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #bd4d37;
+  color: #fffaf0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.brand small {
+  display: block;
+  margin-top: 4px;
+  color: #858078;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.brand:focus-visible {
+  outline: 2px solid #bd4d37;
+  outline-offset: 4px;
+}
+
+.brand:disabled {
+  cursor: default;
+}
+
+/* Menu aberto pelo logótipo. */
+
+/* Menu opened by the logo. */
+.brand-menu {
+  position: relative;
+}
+
+.brand-menu-list {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  padding: 5px;
+  border: 1px solid rgba(66, 62, 53, 0.13);
+  background: rgba(248, 246, 240, 0.97);
+  box-shadow: 0 12px 40px rgba(42, 37, 28, 0.12);
+}
+
+.brand-menu-list[hidden] {
+  display: none;
+}
+
+.brand-menu-item {
+  padding: 9px 11px;
+  border: 0;
+  background: none;
+  color: #3a3832;
+  font: inherit;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.brand-menu-item:hover {
+  background: rgba(189, 77, 55, 0.1);
+}
+
+.brand-menu-item:focus-visible {
+  outline: 2px solid #bd4d37;
+  outline-offset: -2px;
+}
+
+/* Painel da legenda da linha de montagem (canto superior direito, ao nível do logótipo na barra superior). */
+
+/* Assembly-line legend panel (top-right corner, level with the logo in the top bar). */
+.legend {
+  top: 15px;
+  right: 5.2%;
+  width: 230px;
+  padding: 14px 17px;
+  border: 1px solid rgba(66, 62, 53, 0.13);
+  background: rgba(248, 246, 240, 0.76);
+  box-shadow: 0 12px 40px rgba(42, 37, 28, 0.045);
+  backdrop-filter: blur(12px);
+}
+
+/* Título da legenda, que é também o botão que minimiza/expande o painel. */
+
+/* Legend title, also the button that minimizes/expands the panel. */
+.legend-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0 0 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #3a3832;
+  font: inherit;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-align: left;
+  cursor: pointer;
+}
+
+.legend-heading:focus-visible {
+  outline: 2px solid #bd4d37;
+  outline-offset: 4px;
+}
+
+/* Ícone redondo de minimizar/expandir à direita do título. */
+
+/* Round minimize/expand icon at the right of the title. */
+.legend-toggle-icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  margin-left: auto;
+  border: 1px solid rgba(66, 62, 53, 0.2);
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.legend-heading:hover .legend-toggle-icon {
+  background: rgba(66, 62, 53, 0.06);
+}
+
+/* Sinal de menos; a barra vertical transforma-o em mais quando minimizado. */
+
+/* Minus sign; the vertical bar turns it into a plus when collapsed. */
+.legend-toggle-icon::before,
+.legend-toggle-icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 1.5px;
+  background: #3a3832;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease;
+}
+
+.legend-toggle-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg) scaleX(0);
+}
+
+.legend--collapsed .legend-toggle-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg) scaleX(1);
+}
+
+/* Estado minimizado: só a linha do título fica visível. */
+
+/* Minimized state: only the title row stays visible. */
+.legend--collapsed .legend-heading {
+  margin-bottom: 0;
+}
+
+/* Texto lido por leitores de ecrã mas não mostrado no ecrã. */
+
+/* Text read by screen readers but not shown on screen. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.legend-heading span {
+  color: #bd4d37;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Linhas da legenda com pontos coloridos para cada parte da linha. */
+
+/* Legend rows with coloured dots for each part of the line. */
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+  color: #716e66;
+  font-size: 10px;
+}
+
+.legend-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.legend-dot--dough {
+  background: #d7a661;
+}
+
+.legend-dot--belt {
+  background: #59615e;
+}
+
+.legend-dot--oven {
+  background: #bc654a;
+}
+
+/* Divisória e valores de área/medida no fundo da legenda. */
+
+/* Divider and floor/measurement figures at the bottom of the legend. */
+.legend-divider {
+  height: 1px;
+  margin: 12px 0 10px;
+  background: rgba(66, 62, 53, 0.13);
+}
+
+.legend-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7px;
+  color: #929087;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+}
+
+.legend-meta b {
+  color: #514f48;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* Barra inferior com os controlos do rato (deslocar, rodar, zoom). */
+
+/* Bottom bar with the mouse controls (pan, orbit, zoom). */
+.control-bar {
+  right: 5.2%;
+  bottom: 0;
+  left: 5.2%;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(43, 41, 35, 0.12);
+}
+
+.control-instructions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.control-icon {
+  color: #bd4d37;
+  font-size: 17px;
+}
+
+.control-icon--orbit {
+  font-size: 20px;
+}
+
+.control-instructions b,
+.control-instructions i {
+  display: block;
+  font-size: 9px;
+  font-style: normal;
+}
+
+.control-instructions b {
+  color: #4b4942;
+  font-weight: 600;
+}
+
+.control-instructions i {
+  margin-top: 3px;
+  color: #858178;
+  font-size: 8px;
+}
+
+.control-separator {
+  width: 1px;
+  height: 22px;
+  margin: 0 9px;
+  background: rgba(66, 62, 53, 0.15);
+}
+
+/* Mensagem mostrada enquanto a cozinha carrega (a vermelho quando há erro). */
+
+/* Message shown while the kitchen loads (red when there is an error). */
+.loading-message {
+  top: 50%;
+  left: 50%;
+  padding: 12px 18px;
+  transform: translate(-50%, -50%);
+  background: rgba(248, 246, 240, 0.9);
+  color: #635e54;
+  font-size: 12px;
+}
+
+.loading-message--error {
+  max-width: min(400px, 86vw);
+  color: #a73221;
+  text-align: center;
+}
+
+/* Aviso mostrado quando alguns mapas de textura não carregam. */
+
+/* Warning shown when some texture maps fail to load. */
+.texture-warning {
+  right: 20px;
+  bottom: 86px;
+  max-width: 300px;
+  padding: 10px 12px;
+  background: #fff2df;
+  color: #7b421f;
+  font-size: 11px;
+}
+
+/* Planta 2D mostrada quando o WebGL não está disponível. */
+
+/* 2D floor plan shown when WebGL is unavailable. */
+.floor-plan {
+  position: absolute;
+  z-index: 1;
+  top: 84px;
+  right: 19%;
+  bottom: 80px;
+  left: 17%;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.floor-plan[hidden] {
+  display: none;
+}
+
+.floor-plan svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 18px 24px rgba(48, 41, 31, 0.16));
+}
+
+.floor-plan .equipment-label {
+  fill: #fffaf0;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: rgba(57, 48, 38, 0.82);
+  stroke-linejoin: round;
+  stroke-width: 2px;
+}
+
+.floor-plan .equipment-label--small {
+  font-size: 11px;
+}
+
+/* Nomes junto aos objetos das paredes laterais: alinhados para dentro da sala. */
+
+/* Labels beside items on the side walls: aligned towards the room. */
+.floor-plan .equipment-label--start {
+  text-anchor: start;
+}
+
+.floor-plan .equipment-label--end {
+  text-anchor: end;
+}
+
+/* Legenda dos símbolos da planta (pilares, extintor, objetos suspensos). */
+
+/* Key for the plan symbols (pilasters, extinguisher, overhead items). */
+.floor-plan .plan-key text {
+  fill: #71695d;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.floor-plan .wall-label {
+  fill: #71695d;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-anchor: middle;
+}
+
+/* Aviso a explicar como ativar a vista 3D. */
+
+/* Notice explaining how to enable the 3D view. */
+.fallback-notice {
+  position: absolute;
+  z-index: 3;
+  right: 5.2%;
+  bottom: 86px;
+  max-width: 360px;
+  padding: 10px 12px;
+  border: 1px solid rgba(66, 62, 53, 0.13);
+  background: rgba(248, 246, 240, 0.92);
+  color: #716e66;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* Ajustes de disposição enquanto a planta 2D é mostrada. */
+
+/* Layout adjustments while the 2D floor plan is shown. */
+.scene-shell--plan .legend {
+  display: none;
+}
+
+.scene-shell--plan .control-instructions[hidden] {
+  display: none;
+}
+
+.scene-shell--plan .control-bar {
+  justify-content: center;
+}
+
+/* Tablets e ecrãs pequenos: barra superior compacta e legenda mais estreita. */
+
+/* Tablets and small screens: compact top bar and a narrower legend. */
+@media (max-width: 760px) {
+  .topbar {
+    height: 64px;
+    padding: 0 22px;
+  }
+
+  .scene-shell::after {
+    background: linear-gradient(0deg, rgba(241, 238, 230, 0.94), transparent 28%);
+  }
+
+  .legend {
+    top: 9px;
+    right: 18px;
+    width: 205px;
+    padding: 15px 16px;
+    transform: none;
+  }
+
+  .floor-plan {
+    top: 100px;
+    right: 5%;
+    bottom: 170px;
+    left: 5%;
+  }
+
+  .floor-plan .equipment-label {
+    font-size: 11px;
+  }
+
+  .fallback-notice {
+    right: 18px;
+    bottom: 80px;
+    left: 18px;
+    max-width: none;
+  }
+
+  .control-bar {
+    right: 22px;
+    left: 22px;
+    height: 65px;
+  }
+
+  .control-instructions {
+    gap: 7px;
+  }
+
+  .control-separator {
+    margin: 0 4px;
+  }
+}
+
+/* Telemóveis: legenda mais pequena e barra de controlos mais compacta. */
+
+/* Phones: smaller legend and tighter control bar. */
+@media (max-width: 420px) {
+  .legend {
+    top: 11px;
+    right: 12px;
+    width: 188px;
+    padding: 12px;
+  }
+
+  .legend-row {
+    font-size: 9px;
+  }
+
+  .control-bar {
+    right: 12px;
+    left: 12px;
+  }
+
+  .control-instructions {
+    gap: 5px;
+  }
+
+  .control-separator {
+    margin: 0 2px;
+  }
+}

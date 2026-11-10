@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Metadados da página: codificação, viewport móvel, descrição, cor do navegador e título. -->
+
+    <!-- Page metadata: encoding, mobile viewport, description, browser colour and title. -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore the LaPrizza restaurant kitchen in an interactive 3D model." />
+    <meta name="theme-color" content="#ece9e2" />
+    <title>LaPrizza — Kitchen Overview</title>
+    <link rel="icon" type="image/svg+xml" href="./public/favicon.svg" />
+
+    <!-- Estilos da interface. -->
+
+    <!-- Interface styles. -->
+    <link rel="stylesheet" href="./src/style.css" />
+
+    <!-- Import map: permite ao main.js importar o 'three' e os extras a partir do node_modules sem bundler. -->
+
+    <!-- Import map: lets main.js import 'three' and its add-ons from node_modules without a bundler. -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./node_modules/three/build/three.module.js",
+          "three/addons/": "./node_modules/three/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Contentor onde o main.js constrói a interface e a cena 3D. -->
+
+    <!-- Container where main.js builds the interface and the 3D scene. -->
+    <div id="app"></div>
+
+    <!-- Código da cena (módulo ES). -->
+
+    <!-- Scene code (ES module). -->
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
