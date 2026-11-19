@@ -68,7 +68,7 @@
   "materials": {
     "floor": {
       "color": "#fbfaf7",
-      "roughness": 0.28,
+      "roughness": 0.88,
       "metalness": 0,
       "tileSize": [
         3,
@@ -212,8 +212,8 @@
     },
     "steel": {
       "color": "#e6edf1",
-      "roughness": 0.26,
-      "metalness": 0.9,
+      "roughness": 0.36,
+      "metalness": 0.85,
       "tileSize": [
         0.8,
         0.8
@@ -232,6 +232,24 @@
       "color": "#5a6064",
       "roughness": 0.4,
       "metalness": 0.8,
+      "tileSize": [
+        0.8,
+        0.8
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/brushed_concrete/brushed_concrete_nor_gl_1k.jpg"
+      },
+      "normalScale": [
+        0.12,
+        0.12
+      ]
+    },
+        "darkTop": {
+      "color": "#5a6064",
+      "roughness": 0.98,
+      "metalness": 0,
       "tileSize": [
         0.8,
         0.8
@@ -320,7 +338,7 @@
     },
     "belt": {
       "color": "#5f6466",
-      "roughness": 0.8,
+      "roughness": 0.95,
       "metalness": 0,
       "tileSize": [
         0.45,
@@ -366,7 +384,7 @@
     },
     "wood": {
       "color": "#ffffff",
-      "roughness": 0.68,
+      "roughness": 0.98,
       "metalness": 0,
       "tileSize": [
         1.4,
@@ -419,7 +437,7 @@
     },
     "sauce": {
       "color": "#a72a19",
-      "roughness": 0.32,
+      "roughness": 0.8,
       "metalness": 0,
       "tileSize": [
         0.25,
@@ -437,7 +455,7 @@
     },
     "cheese": {
       "color": "#f2da8e",
-      "roughness": 0.42,
+      "roughness": 0.72,
       "metalness": 0,
       "tileSize": [
         0.25,
@@ -455,7 +473,7 @@
     },
     "pepperoni": {
       "color": "#8d2a1d",
-      "roughness": 0.5,
+      "roughness": 0.8,
       "metalness": 0,
       "tileSize": [
         0.2,
@@ -469,7 +487,7 @@
     },
     "basil": {
       "color": "#3d7a2b",
-      "roughness": 0.55,
+      "roughness": 0.78,
       "metalness": 0,
       "tileSize": [
         0.2,
@@ -2971,7 +2989,7 @@
     },
     "spotlight": {
       "color": "#fff8ef",
-      "intensity": 40,
+      "intensity": 25,
       "position": [
         0.6,
         4.05,
@@ -2993,7 +3011,7 @@
     },
     "fill": {
       "color": "#eef3ff",
-      "intensity": 0.55,
+      "intensity": 0.25,
       "position": [
         -4,
         9,

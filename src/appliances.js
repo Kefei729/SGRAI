@@ -114,6 +114,6 @@ export function addDishwasher(equipment, materials, item) {
   addCabinet(equipment, materials, item.dimensions)
   addBox(equipment, materials.steel, [0, height * 0.5, depth / 2 + 0.015], [width - 0.06, height * 0.62, 0.03])
   addBox(equipment, materials.blackPaint, [0, height * 0.88, depth / 2 + 0.02], [width - 0.08, 0.1, 0.02])
-  addBox(equipment, materials.darkSteel, [0, height * 0.78, depth / 2 + 0.05], [width * 0.5, 0.03, 0.04])
+  addBox(equipment, materials.darkTop, [0, height * 0.78, depth / 2 + 0.05], [width * 0.5, 0.03, 0.04])
   addBox(equipment, materials.steel, [0, height + 0.01, 0], [width + 0.02, 0.02, depth + 0.02])
 }
