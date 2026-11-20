@@ -76,11 +76,12 @@ export function addOven(group, materials, item, lighting) {
   addBox(group, domeMaterial, [0, hearthTop + 0.15, mouthZ], [archRadius * 2, 0.3, 0.42])
   addMesh(group, cylinderGeometry(archRadius, archRadius, 0.42, 32, false, -Math.PI / 2, Math.PI), domeMaterial, [0, hearthTop + 0.3, mouthZ], { rotation: [-Math.PI / 2, 0, 0] })
   const front = mouthZ + 0.21
-  addBox(group, materials.soot, [0, hearthTop + 0.11, front], [0.52, 0.22, 0.02], { castShadow: false })
-  addMesh(group, cylinderGeometry(0.26, 0.26, 0.02, 32, false, -Math.PI / 2, Math.PI), materials.soot, [0, hearthTop + 0.22, front], { rotation: [-Math.PI / 2, 0, 0], castShadow: false })
-  addBox(group, materials.embers, [0, hearthTop + 0.035, front + 0.012], [0.44, 0.05, 0.01], { castShadow: false })
+  addBox(group, materials.soot, [0, hearthTop + 0.11, front], [0.52, 0.22, 0.02], { castShadow: true, receiveShadow: true })
+  addMesh(group, cylinderGeometry(0.26, 0.26, 0.02, 32, false, -Math.PI / 2, Math.PI), materials.soot, [0, hearthTop + 0.22, front], { rotation: [-Math.PI / 2, 0, 0], castShadow: true, receiveShadow: true })
+  addBox(group, materials.embers, [0, hearthTop + 0.035, front + 0.012], [0.44, 0.05, 0.01], { castShadow: true, receiveShadow: true })
   const trim = addMesh(group, new THREE.TorusGeometry(0.28, 0.018, 10, 32, Math.PI), materials.copper, [0, hearthTop + 0.22, front + 0.012])
-  trim.castShadow = false
+  trim.castShadow = true
+  trim.receiveShadow = true
   for (const x of [-0.28, 0.28]) addBox(group, materials.copper, [x, hearthTop + 0.11, front + 0.012], [0.036, 0.22, 0.036])
   addBox(group, materials.steel, [0, hearthTop - 0.02, (front + depth / 2) / 2 + 0.02], [0.6, 0.02, depth / 2 - front + 0.04])
 
@@ -154,9 +155,9 @@ export function addTunnelOven(group, materials, item, lighting) {
     mouth.position.set(x, 0, item.tunnelZ)
     mouth.rotation.set(...turn)
     group.add(mouth)
-    addBox(mouth, materials.soot, [0, (height + beltTop + 0.25) / 2, 0], [archWidth, beltTop + 0.25 - height, 0.02], { castShadow: false })
-    addMesh(mouth, cylinderGeometry(archWidth / 2, archWidth / 2, 0.02, 32, false, -Math.PI / 2, Math.PI), materials.soot, [0, beltTop + 0.25, 0], { rotation: [-Math.PI / 2, 0, 0], castShadow: false })
-    addBox(mouth, materials.embers, [0, beltTop + 0.02, 0.012], [archWidth - 0.12, 0.03, 0.01], { castShadow: false })
+    addBox(mouth, materials.soot, [0, (height + beltTop + 0.25) / 2, 0], [archWidth, beltTop + 0.25 - height, 0.02], { castShadow: true, receiveShadow: true })
+    addMesh(mouth, cylinderGeometry(archWidth / 2, archWidth / 2, 0.02, 32, false, -Math.PI / 2, Math.PI), materials.soot, [0, beltTop + 0.25, 0], { rotation: [-Math.PI / 2, 0, 0], castShadow: true, receiveShadow: true })
+    addBox(mouth, materials.embers, [0, beltTop + 0.02, 0.012], [archWidth - 0.12, 0.03, 0.01], { castShadow: true, receiveShadow: true })
     addMesh(mouth, new THREE.TorusGeometry(archWidth / 2 + 0.02, 0.02, 10, 32, Math.PI), trim, [0, beltTop + 0.25, 0.015])
     for (const post of [-1, 1]) addBox(mouth, trim, [post * (archWidth / 2 + 0.02), (height + beltTop + 0.25) / 2, 0.015], [0.04, beltTop + 0.25 - height, 0.04])
     const fire = new THREE.PointLight(lighting.ovenFire.color, lighting.ovenFire.intensity, lighting.ovenFire.distance, lighting.ovenFire.decay)

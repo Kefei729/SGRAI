@@ -348,7 +348,8 @@ async function addProps(layout) {
     const ceilingMounted = placement.mount === 'ceiling'
     wrapper.traverse((object) => {
       if (object.isMesh) {
-        object.castShadow = !ceilingMounted
+        // All imported objects cast and receive shadows, including ceiling-mounted props.
+        object.castShadow = true
         object.receiveShadow = true
       }
     })
@@ -410,11 +411,22 @@ function addLighting(layout) {
   keyLight.shadow.normalBias = spot.shadowNormalBias
   scene.add(keyLight, keyLight.target)
 
-  // Luz direcional suave de preenchimento (sem sombras) para definir contornos.
+  // Directional fill light covering the whole kitchen and contributing shadows.
 
-  // Soft directional fill light (no shadows) to define contours.
   const fill = new THREE.DirectionalLight(lighting.fill.color, lighting.fill.intensity)
   fill.position.set(...lighting.fill.position)
+  // Use the fill light's shadow camera to cover the whole 16 m × 10 m kitchen,
+  // so cabinets at the side walls also cast visible shadows on the floor.
+  fill.castShadow = true
+  fill.shadow.mapSize.set(2048, 2048)
+  fill.shadow.camera.left = -10
+  fill.shadow.camera.right = 10
+  fill.shadow.camera.top = 8
+  fill.shadow.camera.bottom = -6
+  fill.shadow.camera.near = 0.5
+  fill.shadow.camera.far = 30
+  fill.shadow.bias = -0.0002
+  fill.shadow.normalBias = 0.02
   scene.add(fill)
 
   // Luzes de área suaves alinhadas com as filas de lâmpadas fluorescentes (sem sombras, leves de desenhar).

@@ -233,7 +233,7 @@ export default class AssemblyLine extends THREE.Group {
     }
     addBox(this.dispenser, materials.whitePaint, [0, dispenserDef.gantryHeight, gantryZ], [1.1, 0.1, 0.1])
     addBox(this.dispenser, materials.whitePaint, [0, dispenserDef.gantryHeight, gantryZ / 2], [0.1, 0.1, Math.abs(gantryZ) + 0.1])
-    const magazine = addMesh(this.dispenser, cylinderGeometry(radius, radius, dispenserDef.magazineHeight, 32, true), materials.glass, [0, (bottom + magazineTop) / 2, 0], { castShadow: false })
+    const magazine = addMesh(this.dispenser, cylinderGeometry(radius, radius, dispenserDef.magazineHeight, 32, true), materials.glass, [0, (bottom + magazineTop) / 2, 0], { castShadow: true, receiveShadow: true })
     magazine.renderOrder = 2
     addCylinder(this.dispenser, materials.steel, [0, magazineTop + 0.06, 0], radius + 0.03, radius + 0.03, 0.12, 32)
     addCylinder(this.dispenser, materials.steel, [0, bottom - 0.03, 0], radius + 0.03, radius + 0.03, 0.06, 32)

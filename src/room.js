@@ -14,7 +14,8 @@ export default function addKitchenStructure(scene, ceilingGroup, materials, layo
   const { width, depth, wallHeight } = layout.kitchen
   const names = layout.kitchen.materials
 
-  addBox(kitchen, materials[names.floor], [0, -0.05, 0], [width, 0.1, depth], { castShadow: false })
+  // The floor receives shadows but does not cast one.
+  addBox(kitchen, materials[names.floor], [0, -0.05, 0], [width, 0.1, depth], { castShadow: false, receiveShadow: true })
 
   // Paredes: opacas e com duas faces (material "brick" com doubleSided), por isso veem-se de qualquer ângulo, por dentro ou por fora. O teto tem uma só face.
 
@@ -26,7 +27,8 @@ export default function addKitchenStructure(scene, ceilingGroup, materials, layo
   ]
   for (const wall of walls) {
     const geometry = scaleUVs(new THREE.PlaneGeometry(...wall.size), () => wall.size)
-    addMesh(kitchen, geometry, materials[names.walls], wall.position, { rotation: [0, wall.rotationY, 0], castShadow: false })
+    // Walls receive shadows but do not cast one into the kitchen.
+    addMesh(kitchen, geometry, materials[names.walls], wall.position, { rotation: [0, wall.rotationY, 0], castShadow: false, receiveShadow: true })
 
     // Desativado: face exterior translúcida (material "brickOutside"). Para a usar, retira o comentário deste bloco e remove o doubleSided do "brick" no JSON (public/kitchen-layout.json, "materials" > "brick"), ou seja, apaga esta linha e a vírgula no fim da linha anterior:
     //   "doubleSided": true
@@ -43,8 +45,8 @@ export default function addKitchenStructure(scene, ceilingGroup, materials, layo
   // Ceiling plane facing down and the ceiling beam.
   scene.add(ceilingGroup)
   const ceiling = scaleUVs(new THREE.PlaneGeometry(width, depth), () => [width, depth])
-  addMesh(ceilingGroup, ceiling, materials[names.ceiling], [0, wallHeight, 0], { rotation: [Math.PI / 2, 0, 0], castShadow: false })
+  addMesh(ceilingGroup, ceiling, materials[names.ceiling], [0, wallHeight, 0], { rotation: [Math.PI / 2, 0, 0], castShadow: false, receiveShadow: true, })
   const beam = layout.kitchen.ceilingBeam
-  addBox(ceilingGroup, materials[names.beam], [beam.x, wallHeight - beam.height / 2, 0], [beam.width, beam.height, depth], { castShadow: false })
+  addBox(ceilingGroup, materials[names.beam], [beam.x, wallHeight - beam.height / 2, 0], [beam.width, beam.height, depth], { castShadow: false, receiveShadow: true })
   return kitchen
 }

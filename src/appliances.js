@@ -88,7 +88,7 @@ export function addExhaustHood(equipment, materials, item) {
   geometry.computeVertexNormals()
   addMesh(equipment, geometry, materials.steel, [0, height / 2, 0])
   addBox(equipment, materials.steel, [0, 0.04, 0], [width + 0.04, 0.08, depth + 0.04])
-  addBox(equipment, materials.darkSteel, [0, 0.005, 0], [width - 0.1, 0.01, depth - 0.1], { castShadow: false })
+  addBox(equipment, materials.darkSteel, [0, 0.005, 0], [width - 0.1, 0.01, depth - 0.1], {castShadow: true, receiveShadow: true })
   addBox(equipment, materials.steel, [0, (height + item.ductTop - item.position[1]) / 2, depth * 0.2], [0.45, item.ductTop - item.position[1] - height, 0.45])
 }
 
@@ -99,7 +99,7 @@ export function addSink(equipment, materials, item) {
   const [width, height, depth] = item.dimensions
   addCabinet(equipment, materials, item.dimensions)
   for (const x of [-width / 4, width / 4]) {
-    addBox(equipment, materials.darkSteel, [x, height - 0.005, 0.02], [width / 2 - 0.12, 0.012, depth - 0.2], { castShadow: false })
+    addBox(equipment, materials.darkSteel, [x, height - 0.005, 0.02], [width / 2 - 0.12, 0.012, depth - 0.2], { castShadow: true, receiveShadow: true  })
   }
   addBox(equipment, materials.steel, [0, height + 0.12, -depth / 2 + 0.03], [width, 0.24, 0.02])
   addCylinder(equipment, materials.steel, [0, height + 0.2, -depth / 2 + 0.08], 0.018, 0.018, 0.4, 12)

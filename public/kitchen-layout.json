@@ -2980,12 +2980,12 @@
   "lighting": {
     "ambient": {
       "color": "#ffffff",
-      "intensity": 0.45
+      "intensity": 0.2
     },
     "hemisphere": {
       "skyColor": "#ffffff",
       "groundColor": "#d6cfc8",
-      "intensity": 0.6
+      "intensity": 0.4
     },
     "spotlight": {
       "color": "#fff8ef",
