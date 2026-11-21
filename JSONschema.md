@@ -207,7 +207,7 @@ Os valores `x` e `z` são coordenadas locais. / The `x` and `z` values are local
 | `robotArms[].id` | string | `"arm-sauce"` | Identificador do robô. | Robot identifier. |
 | `robotArms[].x` | number | `-2.675` | Posição X do robô. | Robot X position. |
 | `robotArms[].z` | number | `-0.5` | Posição Z do robô. | Robot Z position. |
-| `robotArms[].ingredient` | string | `"sauce"` | Ingrediente: `sauce`, `cheese`, `pepperoni` ou `basil`. | Ingredient: `sauce`, `cheese`, `pepperoni` or `basil`. |
+| `robotArms[].ingredient` | string | `"sauce"` | Ingrediente: `sauce`, `cheese`, `pepperoni`, `mushroom`, `olive` ou `basil`. | Ingredient: `sauce`, `cheese`, `pepperoni`, `mushroom`, `olive` or `basil`. |
 | `robotArms[].reach` | number | `0.75` | Distância horizontal até à ponta da ferramenta. | Horizontal distance to the tool tip. |
 | `robotArms[].tipHeight` | number | `0.27` | Altura da ponta da ferramenta acima da bancada. | Tool tip height above the counter. |
 | `robotArms[].yaw` | number | `0` | Rotação da torre do robô, em radianos. | Robot turret rotation, in radians. |

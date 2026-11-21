@@ -58,7 +58,7 @@
   },
   "environment": {
     "url": "./public/hdri/studio_small_09_1k.hdr",
-    "intensity": 1.0,
+    "intensity": 1,
     "credit": "Studio Small 09 HDRI by Poly Haven (CC0) - used only for reflections, not as background"
   },
   "modelSource": {
@@ -246,7 +246,7 @@
         0.12
       ]
     },
-        "darkTop": {
+    "darkTop": {
       "color": "#5a6064",
       "roughness": 0.98,
       "metalness": 0,
@@ -499,6 +499,34 @@
         "normal": "./public/textures/white_plaster_02/white_plaster_02_nor_gl_1k.jpg"
       }
     },
+    "mushroom": {
+      "color": "#cdb79e",
+      "roughness": 0.82,
+      "metalness": 0,
+      "tileSize": [
+        0.2,
+        0.2
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/white_plaster_02/white_plaster_02_nor_gl_1k.jpg"
+      }
+    },
+    "olive": {
+      "color": "#2d2a24",
+      "roughness": 0.55,
+      "metalness": 0,
+      "tileSize": [
+        0.2,
+        0.2
+      ],
+      "maps": {
+        "color": "./public/textures/white_plaster_02/white_plaster_02_diff_1k.jpg",
+        "roughness": "./public/textures/white_plaster_02/white_plaster_02_rough_1k.jpg",
+        "normal": "./public/textures/white_plaster_02/white_plaster_02_nor_gl_1k.jpg"
+      }
+    },
     "embers": {
       "color": "#ff7a2a",
       "roughness": 0.9,
@@ -590,40 +618,66 @@
         },
         {
           "id": "arm-cheese",
-          "x": -1.025,
+          "x": -1.325,
           "z": -0.5,
           "ingredient": "cheese",
           "reach": 0.7,
           "tipHeight": 0.3,
           "yaw": 0.08,
           "ingredientBin": {
-            "x": -0.605,
+            "x": -0.905,
             "z": -0.52
           }
         },
         {
           "id": "arm-pepperoni",
-          "x": 0.625,
+          "x": 0.025,
           "z": -0.5,
           "ingredient": "pepperoni",
           "reach": 0.78,
           "tipHeight": 0.26,
           "yaw": -0.06,
           "ingredientBin": {
-            "x": 1.045,
+            "x": 0.445,
+            "z": -0.52
+          }
+        },
+        {
+          "id": "arm-mushroom",
+          "x": 1.375,
+          "z": -0.5,
+          "ingredient": "mushroom",
+          "reach": 0.74,
+          "tipHeight": 0.28,
+          "yaw": -0.04,
+          "ingredientBin": {
+            "x": 1.795,
+            "z": -0.52
+          }
+        },
+        {
+          "id": "arm-olive",
+          "x": 2.725,
+          "z": -0.5,
+          "ingredient": "olive",
+          "reach": 0.72,
+          "tipHeight": 0.31,
+          "yaw": 0.07,
+          "ingredientBin": {
+            "x": 3.145,
             "z": -0.52
           }
         },
         {
           "id": "arm-basil",
-          "x": 2.275,
+          "x": 4.075,
           "z": -0.5,
           "ingredient": "basil",
           "reach": 0.72,
           "tipHeight": 0.32,
           "yaw": 0.1,
           "ingredientBin": {
-            "x": 2.695,
+            "x": 4.495,
             "z": -0.52
           }
         }
@@ -637,27 +691,59 @@
       "pizzaStages": [
         {
           "x": -4.425,
-          "stage": "dough"
+          "stage": 0
         },
         {
           "x": -3.525,
-          "stage": "dough"
+          "stage": 0
         },
         {
           "x": -2.675,
-          "stage": "sauce"
+          "stage": 1
         },
         {
-          "x": -1.845,
-          "stage": "sauce"
+          "x": -2,
+          "stage": 1
         },
         {
-          "x": -1.025,
-          "stage": "cheese"
+          "x": -1.325,
+          "stage": 2
         },
         {
-          "x": -0.205,
-          "stage": "cheese"
+          "x": -0.65,
+          "stage": 2
+        },
+        {
+          "x": 0.025,
+          "stage": 3
+        },
+        {
+          "x": 0.7,
+          "stage": 3
+        },
+        {
+          "x": 1.375,
+          "stage": 4
+        },
+        {
+          "x": 2.05,
+          "stage": 4
+        },
+        {
+          "x": 2.725,
+          "stage": 5
+        },
+        {
+          "x": 3.4,
+          "stage": 5
+        },
+        {
+          "x": 4.075,
+          "stage": 6
+        },
+        {
+          "x": 4.75,
+          "stage": 6
         }
       ],
       "components": [
@@ -690,7 +776,7 @@
       "dimensions": [
         2.3,
         0.95,
-        2.0
+        2
       ],
       "materials": {
         "base": "concrete",
@@ -913,7 +999,7 @@
       "dimensions": [
         2.6,
         0.92,
-        1.0
+        1
       ]
     },
     {
@@ -1261,7 +1347,7 @@
         },
         "minutes": {
           "node": "wall_clock_minute_hand",
-          "restAngle": 57.0
+          "restAngle": 57
         },
         "seconds": {
           "node": "wall_clock_second_hand",
@@ -1271,96 +1357,6 @@
     }
   },
   "props": [
-    {
-      "model": "pizzas",
-      "position": [
-        -1.5,
-        1.09,
-        -3.6
-      ],
-      "rotation": [
-        0,
-        0.3,
-        0
-      ],
-      "scale": 1,
-      "node": "Pizza_01"
-    },
-    {
-      "model": "pizzas",
-      "position": [
-        -0.65,
-        1.09,
-        -3.6
-      ],
-      "rotation": [
-        0,
-        1.9,
-        0
-      ],
-      "scale": 1,
-      "node": "Pizza_03"
-    },
-    {
-      "model": "pizzas",
-      "position": [
-        0.15,
-        1.09,
-        -3.6
-      ],
-      "rotation": [
-        0,
-        4.1,
-        0
-      ],
-      "scale": 1,
-      "node": "Pizza_05"
-    },
-    {
-      "model": "pizzas",
-      "position": [
-        1.2,
-        1.09,
-        -3.6
-      ],
-      "rotation": [
-        0,
-        0.8,
-        0
-      ],
-      "scale": 1,
-      "node": "Pizza_08"
-    },
-    {
-      "model": "pizzas",
-      "position": [
-        2.0,
-        1.09,
-        -3.6
-      ],
-      "rotation": [
-        0,
-        2.6,
-        0
-      ],
-      "scale": 1,
-      "node": "Pizza_10"
-    },
-    {
-      "model": "pizzas",
-      "position": [
-        2.75,
-        1.09,
-        -3.6
-      ],
-      "rotation": [
-        0,
-        5.2,
-        0
-      ],
-      "scale": 1,
-      "node": "Pizza_14"
-    },
     {
       "model": "cuttingBoard",
       "position": [
@@ -1373,7 +1369,7 @@
         0.1,
         0
       ],
-      "scale": 1.0
+      "scale": 1
     },
     {
       "model": "pizzas",
@@ -1402,7 +1398,7 @@
         -0.04,
         0
       ],
-      "scale": 1.0
+      "scale": 1
     },
     {
       "model": "pizzas",
@@ -1616,7 +1612,7 @@
       "position": [
         -6.655,
         4.2,
-        -1.0
+        -1
       ],
       "rotation": [
         0,
@@ -1632,7 +1628,7 @@
       "position": [
         -5.745,
         4.2,
-        -1.0
+        -1
       ],
       "rotation": [
         0,
@@ -1648,7 +1644,7 @@
       "position": [
         -4.655,
         4.2,
-        -1.0
+        -1
       ],
       "rotation": [
         0,
@@ -1664,7 +1660,7 @@
       "position": [
         -3.745,
         4.2,
-        -1.0
+        -1
       ],
       "rotation": [
         0,
@@ -1680,7 +1676,7 @@
       "position": [
         -2.655,
         4.2,
-        -1.0
+        -1
       ],
       "rotation": [
         0,
@@ -1696,7 +1692,7 @@
       "position": [
         -1.745,
         4.2,
-        -1.0
+        -1
       ],
       "rotation": [
         0,
@@ -1712,7 +1708,7 @@
       "position": [
         1.545,
         4.2,
-        -1.0
+        -1
       ],
       "rotation": [
         0,
@@ -1728,7 +1724,7 @@
       "position": [
         2.455,
         4.2,
-        -1.0
+        -1
       ],
       "rotation": [
         0,
@@ -1744,7 +1740,7 @@
       "position": [
         3.545,
         4.2,
-        -1.0
+        -1
       ],
       "rotation": [
         0,
@@ -1760,7 +1756,7 @@
       "position": [
         4.455,
         4.2,
-        -1.0
+        -1
       ],
       "rotation": [
         0,
@@ -1776,7 +1772,7 @@
       "position": [
         5.545,
         4.2,
-        -1.0
+        -1
       ],
       "rotation": [
         0,
@@ -1792,7 +1788,7 @@
       "position": [
         6.455,
         4.2,
-        -1.0
+        -1
       ],
       "rotation": [
         0,
@@ -2210,7 +2206,7 @@
       ],
       "rotation": [
         0,
-        0.0,
+        0,
         0
       ],
       "scale": 0.36
@@ -2252,7 +2248,7 @@
       ],
       "rotation": [
         0,
-        0.0,
+        0,
         0
       ],
       "scale": 0.36
@@ -2294,7 +2290,7 @@
       ],
       "rotation": [
         0,
-        0.0,
+        0,
         0
       ],
       "scale": 0.36
@@ -2336,7 +2332,7 @@
       ],
       "rotation": [
         0,
-        0.0,
+        0,
         0
       ],
       "scale": 0.36
@@ -2364,7 +2360,7 @@
       ],
       "rotation": [
         0,
-        0.0,
+        0,
         0
       ],
       "scale": 0.4
@@ -2414,7 +2410,7 @@
     {
       "model": "ceramicPot",
       "position": [
-        -1.0,
+        -1,
         2.57,
         -4.83
       ],
@@ -2476,7 +2472,7 @@
       ],
       "rotation": [
         0,
-        0.0,
+        0,
         0
       ],
       "scale": 0.85
@@ -2493,7 +2489,7 @@
         1.3,
         0
       ],
-      "scale": 1.0
+      "scale": 1
     },
     {
       "model": "enamelPot",
@@ -2521,7 +2517,7 @@
         3.9,
         0
       ],
-      "scale": 1.0
+      "scale": 1
     },
     {
       "model": "enamelPot",
@@ -2549,7 +2545,7 @@
         6.5,
         0
       ],
-      "scale": 1.0
+      "scale": 1
     },
     {
       "model": "enamelPot",
@@ -2577,7 +2573,7 @@
         9.1,
         0
       ],
-      "scale": 1.0
+      "scale": 1
     },
     {
       "model": "enamelPot",
@@ -2605,7 +2601,7 @@
         11.7,
         0
       ],
-      "scale": 1.0
+      "scale": 1
     },
     {
       "model": "steelShelves",
@@ -2952,7 +2948,7 @@
       "model": "fireExtinguisher",
       "position": [
         7.35,
-        1.0,
+        1,
         -4.82
       ],
       "rotation": [
@@ -3000,7 +2996,7 @@
         0.95,
         -3.85
       ],
-      "angle": 1.0,
+      "angle": 1,
       "penumbra": 0.6,
       "decay": 1.5,
       "distance": 18,
@@ -3026,7 +3022,7 @@
       "y": 4.1,
       "rows": [
         -3.3,
-        -1.0,
+        -1,
         1.4,
         3.6
       ]

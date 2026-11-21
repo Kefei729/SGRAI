@@ -4,6 +4,55 @@
 import * as THREE from 'three'
 import { addAxle, addBox, addCylinder, addMesh, capsuleGeometry, cylinderGeometry, scaleUVs, seededRandom } from './mesh_helpers.js'
 
+// Catálogo de ingredientes: cada robô refere-se a um ingrediente pelo nome (definition.ingredient).
+// A chave 'material' tem de existir em `materials`. Para acrescentar um ingrediente basta uma entrada aqui + o material.
+//   layer 'spread' = camada lisa (molho); 'cheese' = queijo com manchas; 'pieces' = peças soltas (pepperoni, cogumelo, ...)
+//   bin   'bulk'   = recipiente cheio; 'pieces' = recipiente cheio + peças à superfície
+
+// Ingredient catalogue: each robot refers to an ingredient by name (definition.ingredient).
+// The 'material' key must exist in `materials`. To add an ingredient, add an entry here + the material.
+//   layer 'spread' = flat layer (sauce); 'cheese' = cheese with clumps; 'pieces' = loose pieces (pepperoni, mushroom, ...)
+//   bin   'bulk'   = filled pan; 'pieces' = filled pan + pieces on top
+const INGREDIENTS = {
+  sauce: { material: 'sauce', layer: 'spread', bin: 'bulk' },
+  cheese: { material: 'cheese', layer: 'cheese', bin: 'bulk' },
+  pepperoni: { material: 'pepperoni', layer: 'pieces', bin: 'pieces', pieceRadius: 0.022, pizzaPieces: 9 },
+  basil: { material: 'basil', layer: 'pieces', bin: 'pieces', pieceRadius: 0.018, pizzaPieces: 8 },
+  // Novos / New (assumed - adjust to your design; each needs materials.mushroom / materials.olive)
+  mushroom: { material: 'mushroom', layer: 'pieces', bin: 'pieces', pieceRadius: 0.02, pizzaPieces: 8 },
+  olive: { material: 'olive', layer: 'pieces', bin: 'pieces', pieceRadius: 0.012, pizzaPieces: 12 },
+}
+
+// Ingrediente desconhecido: tratado como peças soltas com o material do mesmo nome.
+
+// Unknown ingredient: treated as loose pieces using the material of the same name.
+function ingredientInfo(name) {
+  if (!INGREDIENTS[name]) {
+    console.warn(`AssemblyLine: ingredient "${name}" is not in INGREDIENTS, using defaults`)
+  }
+  return INGREDIENTS[name] ?? { material: name, layer: 'pieces', bin: 'pieces', pieceRadius: 0.02, pizzaPieces: 8 }
+}
+
+// Semente estável por nome (para as peças ficarem sempre no mesmo sítio).
+
+// Stable seed per name (so the pieces always land in the same spots).
+function nameSeed(name) {
+  return [...name].reduce((sum, char) => sum + char.charCodeAt(0), 0)
+}
+
+// Camadas de uma pizza: lista de ingredientes já aplicados, por ordem.
+// `stage` pode ser: número N (depois dos primeiros N robôs), lista de nomes, ou o texto antigo 'dough' | 'sauce' | 'cheese'.
+
+// Layers of a pizza: list of ingredients already applied, in order.
+// `stage` can be: a number N (after the first N robots), a list of names, or the legacy string 'dough' | 'sauce' | 'cheese'.
+function resolveLayers(stage, robotDefinitions = []) {
+  if (Array.isArray(stage)) return stage
+  if (typeof stage === 'number') return robotDefinitions.slice(0, stage).map((definition) => definition.ingredient)
+  if (stage === 'sauce') return ['sauce']
+  if (stage === 'cheese') return ['sauce', 'cheese']
+  return []
+}
+
 // Bancada no estilo da referência: laje grossa de betão sobre pórticos de aço branco.
 
 // Counter in the reference style: thick concrete slab on white steel portal frames.
@@ -24,10 +73,10 @@ function addSlabCounter(parent, materials, size, slabMaterial, frameMaterial, sp
   }
 }
 
-// Pizza procedimental numa fase da montagem: massa, massa + molho, ou massa + molho + queijo.
+// Pizza procedimental com as camadas indicadas: massa + (molho, queijo, pepperoni, cogumelo, ...) por ordem.
 
-// Procedural pizza at an assembly stage: dough, dough + sauce, or dough + sauce + cheese.
-function addPizzaBase(parent, materials, position, stage) {
+// Procedural pizza with the given layers: dough + (sauce, cheese, pepperoni, mushroom, ...) in order.
+function addPizzaBase(parent, materials, position, layers = []) {
   const pizza = new THREE.Group()
   pizza.position.set(...position)
   pizza.rotation.y = position[0] * 1.7
@@ -35,43 +84,61 @@ function addPizzaBase(parent, materials, position, stage) {
   const profile = [[0, 0], [0.14, 0], [0.151, 0.004], [0.155, 0.012], [0.151, 0.02], [0.14, 0.023], [0.13, 0.014], [0.0, 0.011]]
   const lathe = scaleUVs(new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r, y)), 40), () => [0.97, 0.2])
   addMesh(pizza, lathe, materials.dough)
-  if (stage === 'sauce' || stage === 'cheese') {
-    addCylinder(pizza, materials.sauce, [0, 0.012, 0], 0.128, 0.128, 0.004, 40)
-  }
-  if (stage === 'cheese') {
-    const random = seededRandom(Math.round(position[0] * 1000))
-    addCylinder(pizza, materials.cheese, [0, 0.0145, 0], 0.112, 0.118, 0.004, 40)
-    for (let index = 0; index < 9; index++) {
-      const angle = random() * Math.PI * 2
-      const radius = 0.03 + random() * 0.08
-      addCylinder(pizza, materials.cheese, [Math.cos(angle) * radius, 0.017, Math.sin(angle) * radius], 0.02, 0.026, 0.006, 12)
+
+  let pieceLayer = 0
+  layers.forEach((name, layerIndex) => {
+    const info = ingredientInfo(name)
+    const material = materials[info.material]
+    const random = seededRandom(Math.round(position[0] * 1000) + nameSeed(name) + layerIndex * 31)
+    if (info.layer === 'spread') {
+      addCylinder(pizza, material, [0, 0.012, 0], 0.128, 0.128, 0.004, 40)
+    } else if (info.layer === 'cheese') {
+      addCylinder(pizza, material, [0, 0.0145, 0], 0.112, 0.118, 0.004, 40)
+      for (let index = 0; index < 9; index++) {
+        const angle = random() * Math.PI * 2
+        const radius = 0.03 + random() * 0.08
+        addCylinder(pizza, material, [Math.cos(angle) * radius, 0.017, Math.sin(angle) * radius], 0.02, 0.026, 0.006, 12)
+      }
+    } else {
+      // Peças soltas: cada camada sobe um pouco para não haver z-fighting entre ingredientes.
+      // Loose pieces: each layer sits slightly higher to avoid z-fighting between ingredients.
+      const y = 0.019 + pieceLayer * 0.002
+      pieceLayer++
+      for (let index = 0; index < info.pizzaPieces; index++) {
+        const angle = random() * Math.PI * 2
+        const radius = 0.02 + random() * 0.09
+        const pieceRadius = info.pieceRadius * 0.9
+        addCylinder(pizza, material, [Math.cos(angle) * radius, y, Math.sin(angle) * radius], pieceRadius, pieceRadius, 0.005, 14)
+      }
     }
-  }
+  })
   return pizza
 }
 
-// Recipiente de inox ao lado de cada robô (molho, queijo, pepperoni ou manjericão).
+// Recipiente de inox ao lado de cada robô (qualquer ingrediente do catálogo).
 
-// Stainless ingredient pan next to each robot (sauce, cheese, pepperoni or basil).
+// Stainless ingredient pan next to each robot (any ingredient from the catalogue).
 function addIngredientBin(parent, materials, position, ingredient) {
+  const info = ingredientInfo(ingredient)
+  const material = materials[info.material]
   const bin = new THREE.Group()
+  bin.name = `bin-${ingredient}`
   bin.position.set(...position)
   parent.add(bin)
   addBox(bin, materials.steel, [0, 0.005, 0], [0.34, 0.01, 0.3])
   for (const [x, z, w, d] of [[-0.165, 0, 0.01, 0.3], [0.165, 0, 0.01, 0.3], [0, -0.145, 0.34, 0.01], [0, 0.145, 0.34, 0.01]]) {
     addBox(bin, materials.steel, [x, 0.06, z], [w, 0.12, d])
   }
-  const random = seededRandom(ingredient.length * 97)
-  if (ingredient === 'pepperoni' || ingredient === 'basil') {
-    addBox(bin, materials[ingredient === 'basil' ? 'basil' : 'pepperoni'], [0, 0.05, 0], [0.31, 0.08, 0.27])
+  const random = seededRandom(nameSeed(ingredient) * 97)
+  if (info.bin === 'pieces') {
+    addBox(bin, material, [0, 0.05, 0], [0.31, 0.08, 0.27])
     for (let index = 0; index < 14; index++) {
       const x = (random() - 0.5) * 0.26
       const z = (random() - 0.5) * 0.22
-      const radius = ingredient === 'basil' ? 0.018 : 0.022
-      addCylinder(bin, materials[ingredient], [x, 0.094, z], radius, radius, 0.006, 14).rotation.set((random() - 0.5) * 0.5, 0, (random() - 0.5) * 0.5)
+      addCylinder(bin, material, [x, 0.094, z], info.pieceRadius, info.pieceRadius, 0.006, 14).rotation.set((random() - 0.5) * 0.5, 0, (random() - 0.5) * 0.5)
     }
   } else {
-    addBox(bin, materials[ingredient], [0, 0.05, 0], [0.31, 0.09, 0.27])
+    addBox(bin, material, [0, 0.05, 0], [0.31, 0.09, 0.27])
   }
   return bin
 }
@@ -255,7 +322,7 @@ export default class AssemblyLine extends THREE.Group {
     this.crusts.name = 'crust-stack'
     this.dispenser.add(this.crusts)
     for (let index = 0; index < dispenserDef.crustCount; index++) {
-      addPizzaBase(this.crusts, materials, [0, bottom + 0.005 + index * 0.026, 0], 'dough').scale.setScalar((radius - 0.012) / 0.155)
+      addPizzaBase(this.crusts, materials, [0, bottom + 0.005 + index * 0.026, 0], []).scale.setScalar((radius - 0.012) / 0.155)
     }
 
     // Tapete rolante desde a plataforma de receção até ao forno.
@@ -280,11 +347,13 @@ export default class AssemblyLine extends THREE.Group {
     }
     addBox(this.conveyor, materials.darkSteel, [beltLength / 2 - 0.72, beltTop / 2 - 0.02, -beltDef.width / 2 - 0.12], [0.3, beltTop - 0.04, 0.2])
 
-    // Pizzas que mostram a progressão da montagem (massa > molho > queijo).
+    // Pizzas que mostram a progressão da montagem: massa, depois uma camada por cada robô (7 pizzas com 6 robôs).
+    // `stage` = número de robôs já passados (0 = só massa), lista de ingredientes, ou o texto antigo.
 
-    // Pizzas showing the assembly progression (dough > sauce > cheese).
+    // Pizzas showing the assembly progression: dough, then one more layer per robot (7 pizzas with 6 robots).
+    // `stage` = number of robots already passed (0 = dough only), a list of ingredients, or the legacy string.
     for (const stage of item.pizzaStages) {
-      addPizzaBase(this, materials, [stage.x, height + beltTop, beltDef.z], stage.stage)
+      addPizzaBase(this, materials, [stage.x, height + beltTop, beltDef.z], resolveLayers(stage.stage, item.robotArms))
     }
 
     // Robôs com os seus recipientes; as partes animáveis ficam guardadas como propriedades deste objeto (como os ponteiros de um relógio) para o Sprint 3.
