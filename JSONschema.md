@@ -29,10 +29,10 @@
 | `camera` | object | Vista inicial e limites da câmara. | Initial view and camera limits. |
 | `environment` | object | Mapa HDRI usado nos reflexos. | HDRI map used for reflections. |
 | `modelSource` | object | Nota sobre a origem dos modelos. | Note on where the models come from. |
-| `materials` | object | Os 25 materiais, por nome. | The 25 materials, by name. |
+| `materials` | object | Os 27 materiais, por nome. | The 27 materials, by name. |
 | `equipment` | array | Os 18 equipamentos construídos por código. | The 18 pieces of equipment built in code. |
 | `models` | object | Os 11 modelos 3D importados, por nome. | The 11 imported 3D models, by name. |
-| `props` | array | As 110 colocações desses modelos na sala. | The 110 placements of those models in the room. |
+| `props` | array | As 104 colocações desses modelos na sala. | The 104 placements of those models in the room. |
 | `lighting` | object | Luzes da cena. | Scene lights. |
 | `attribution` | array | Créditos e licenças. | Credits and licenses. |
 
@@ -140,6 +140,8 @@ Cada entrada é um material, identificado pelo nome. / Each entry is a material,
 | `cheese` | Queijo. | Cheese. |
 | `pepperoni` | Pepperoni. | Pepperoni. |
 | `basil` | Manjericão. | Basil. |
+| `mushroom` | Cogumelo. | Mushroom. |
+| `olive` | Azeitona. | Olive. |
 | `embers` | Brasas incandescentes do forno. | Glowing oven embers. |
 
 ## 9. `equipment`
@@ -218,7 +220,7 @@ Os valores `x` e `z` são coordenadas locais. / The `x` and `z` values are local
 | `armDimensions.forearm` | number | `0.6` | Comprimento do antebraço. | Forearm length. |
 | `armDimensions.tool` | number | `0.15` | Comprimento da ferramenta. | Tool length. |
 | `pizzaStages[].x` | number | `-4.425` | Posição X da pizza na passadeira. | Pizza X position on the conveyor. |
-| `pizzaStages[].stage` | string | `"dough"` | Fase da montagem: `dough`, `sauce` ou `cheese`. | Assembly stage: `dough`, `sauce` or `cheese`. |
+| `pizzaStages[].stage` | number / string | `1` | Fase da montagem: um número N = pizza depois dos primeiros N robôs de `robotArms` (0 = só massa). Aceita também `dough`, `sauce` ou `cheese` (formato antigo). | Assembly stage: a number N = pizza after the first N robots in `robotArms` (0 = dough only). Also accepts `dough`, `sauce` or `cheese` (legacy format). |
 
 ### 9.4 Campos de `tunnel-oven` / `tunnel-oven` fields
 
@@ -281,7 +283,7 @@ Cada entrada é um modelo 3D importado, identificado pelo nome. / Each entry is 
 
 | Nome / Name | Colocações / Placements | Português | English |
 | --- | --- | --- | --- |
-| `pizzas` | 9 | Pizzas prontas. | Finished pizzas. |
+| `pizzas` | 3 | Pizzas prontas. | Finished pizzas. |
 | `pizzaBox` | 10 pilhas / stacks | Caixas de pizza. | Pizza boxes. |
 | `fluorescentLight` | 48 | Lâmpadas fluorescentes do teto. | Ceiling fluorescent lights. |
 | `steelShelves` | 2 | Estantes metálicas. | Steel shelving racks. |
@@ -300,10 +302,10 @@ Cada entrada coloca uma cópia de um modelo na sala. / Each entry places one cop
 | Campo / Field | Tipo / Type | Exemplo / Example | Português | English |
 | --- | --- | --- | --- | --- |
 | `model` | string | `"pizzas"` | Nome do modelo em `models`. | Model name in `models`. |
-| `position` | number[3] | `[-1.5, 1.09, -3.6]` | Posição na sala. | Position in the room. |
-| `rotation` | number[3] | `[0, 0.3, 0]` | Rotação em radianos. | Rotation in radians. |
+| `position` | number[3] | `[5.5, 1.09, -3.6]` | Posição na sala. | Position in the room. |
+| `rotation` | number[3] | `[0, 1.3, 0]` | Rotação em radianos. | Rotation in radians. |
 | `scale` | number | `1` | Escala, multiplicada pela `scale` do modelo. | Scale, multiplied by the model's `scale`. |
-| `node` | string | `"Pizza_01"` | Usa só esta peça do modelo (opcional). | Uses only this part of the model (optional). |
+| `node` | string | `"Pizza_17"` | Usa só esta peça do modelo (opcional). | Uses only this part of the model (optional). |
 | `mount` | string | `"ceiling"` | Pertence ao teto e fica escondido com ele (opcional). | Belongs to the ceiling and is hidden with it (optional). |
 | `stack.count` | number | `6` | Número de cópias empilhadas (opcional). | Number of stacked copies (optional). |
 | `stack.spacing` | number | `0.0648` | Distância vertical entre cópias. | Vertical distance between copies. |
@@ -379,29 +381,29 @@ Cada entrada coloca uma cópia de um modelo na sala. / Each entry places one cop
 
 **EN:** Each robot is an entry in the assembly line's `robotArms` list. The code builds every robot in the list, each with its ingredient bin, and keeps them in `this.arms` for animation.
 
-Exemplo de um quinto robô / Example of a fifth robot:
+Exemplo de um sétimo robô / Example of a seventh robot:
 
 ```json
 {
   "id": "arm-extra",
-  "x": 3.975,
+  "x": 4.075,
   "z": -0.5,
   "ingredient": "pepperoni",
   "reach": 0.75,
   "tipHeight": 0.28,
   "yaw": 0,
-  "ingredientBin": { "x": 4.395, "z": -0.52 }
+  "ingredientBin": { "x": 4.495, "z": -0.52 }
 }
 ```
 
 | Ponto / Topic | Português | English |
 | --- | --- | --- |
-| Espaço / Space | Os robôs atuais estão a cada 1.65 m. Com esse afastamento só cabe mais um, em `x` = 3.975, antes do forno. Para mais, é preciso aproximá-los. | The current robots are 1.65 m apart. At that spacing only one more fits, at `x` = 3.975, before the oven. Adding more requires moving them closer together. |
-| Ingrediente / Ingredient | Tem de ser um material de `materials` (`sauce`, `cheese`, `pepperoni` ou `basil`). Um ingrediente novo precisa de um material novo, com as suas texturas. | Must be a material in `materials` (`sauce`, `cheese`, `pepperoni` or `basil`). A new ingredient needs a new material, with its textures. |
-| Recipiente / Bin | Só `pepperoni` e `basil` mostram pedaços soltos; os outros aparecem como um bloco. Um ingrediente novo com pedaços exige alterar `addIngredientBin` em `src/assembly_line.js`. | Only `pepperoni` and `basil` show loose pieces; the others appear as a solid block. A new ingredient with pieces requires changing `addIngredientBin` in `src/assembly_line.js`. |
+| Espaço / Space | Os seis robôs atuais estão a cada 1.35 m (de `x` = −2.675 a 4.075). Com esse afastamento não cabe mais nenhum: o seguinte ficaria em 5.425, depois do fim da bancada (meia largura 5.275), já dentro do forno. Para um sétimo, é preciso aproximá-los para 1.125 m (`x` = −2.675, −1.55, −0.425, 0.7, 1.825, 2.95) e pôr o novo em 4.075. | The six current robots are 1.35 m apart (from `x` = −2.675 to 4.075). At that spacing none fits: the next would be at 5.425, past the end of the counter (half-width 5.275), already inside the oven. For a seventh, move them closer to 1.125 m (`x` = −2.675, −1.55, −0.425, 0.7, 1.825, 2.95) and put the new one at 4.075. |
+| Ingrediente / Ingredient | Tem de ser um material de `materials` (`sauce`, `cheese`, `pepperoni`, `mushroom`, `olive` ou `basil`) e ter uma entrada em `INGREDIENTS` em `src/assembly_line.js`. Um ingrediente novo precisa de um material novo, com as suas texturas. Sem entrada em `INGREDIENTS`, usa valores por defeito e aparece um aviso na consola. | Must be a material in `materials` (`sauce`, `cheese`, `pepperoni`, `mushroom`, `olive` or `basil`) and have an entry in `INGREDIENTS` in `src/assembly_line.js`. A new ingredient needs a new material, with its textures. Without an `INGREDIENTS` entry it uses default values and a console warning appears. |
+| Recipiente / Bin | Mostram pedaços soltos `pepperoni`, `basil`, `mushroom` e `olive`; `sauce` e `cheese` aparecem como um bloco. A forma vem da entrada em `INGREDIENTS` (`layer`: `spread`, `cheese` ou `pieces`; `bin`: `bulk` ou `pieces`; `pieceRadius`, `pizzaPieces`), sem alterar `addIngredientBin`. | `pepperoni`, `basil`, `mushroom` and `olive` show loose pieces; `sauce` and `cheese` appear as a solid block. The look comes from the `INGREDIENTS` entry (`layer`: `spread`, `cheese` or `pieces`; `bin`: `bulk` or `pieces`; `pieceRadius`, `pizzaPieces`), with no change to `addIngredientBin`. |
 | Alcance / Reach | Se `x` ou `z` mudarem muito, `reach` e `tipHeight` podem precisar de ajuste. | If `x` or `z` change a lot, `reach` and `tipHeight` may need adjusting. |
-| Textos / Text | O painel da página ("Conveyor & 4 topping robots", em `src/main.js`) e o `README.md` indicam quatro robôs e não se atualizam sozinhos. | The page panel ("Conveyor & 4 topping robots", in `src/main.js`) and `README.md` state four robots and do not update on their own. |
-| Pizzas | `pizzaStages` e as pizzas em `props` mostram a montagem por fases. Um robô novo não as altera, mas a sequência visual pode precisar de ajuste. | `pizzaStages` and the pizzas in `props` show the assembly in stages. A new robot does not change them, but the visual sequence may need adjusting. |
+| Textos / Text | O painel da página ("Conveyor & 6 topping robots", em `src/main.js`) e o `README.md` indicam seis robôs e não se atualizam sozinhos. | The page panel ("Conveyor & 6 topping robots", in `src/main.js`) and `README.md` state six robots and do not update on their own. |
+| Pizzas | A ordem de `robotArms` é a ordem das camadas na pizza (por exemplo, `sauce` antes de `cheese`). `pizzaStages` mostra a montagem por fases: 2 pizzas só de massa (stage 0) e 2 por robô (stage 1 a N), 14 com seis robôs. Um robô novo exige novas entradas em `pizzaStages`. As pizzas em `props` já não estão na passadeira, para não se sobreporem. | The order of `robotArms` is the layer order on the pizza (for example, `sauce` before `cheese`). `pizzaStages` shows the assembly in stages: 2 dough-only pizzas (stage 0) and 2 per robot (stage 1 to N), 14 with six robots. A new robot needs new `pizzaStages` entries. The pizzas in `props` are no longer on the conveyor, so they do not overlap. |
 
 ## 16. Implementação futura: texturas mais realistas nos móveis / Future implementation: more realistic furniture textures
 

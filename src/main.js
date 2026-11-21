@@ -36,7 +36,7 @@ app.innerHTML = `
       </button>
       <div class="legend-body" id="legend-body" hidden>
         <div class="legend-row"><i class="legend-dot legend-dot--dough"></i> Overhead crust dispenser</div>
-        <div class="legend-row"><i class="legend-dot legend-dot--belt"></i> Conveyor &amp; 4 topping robots</div>
+        <div class="legend-row"><i class="legend-dot legend-dot--belt"></i> Conveyor &amp; 6 topping robots</div>
         <div class="legend-row"><i class="legend-dot legend-dot--oven"></i> Wood-fired tunnel oven</div>
         <div class="legend-divider"></div>
         <div class="legend-meta"><span>FLOOR AREA</span><b id="floor-area"></b></div>
